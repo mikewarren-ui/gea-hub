@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GE Appliances × Dreamforce 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ─── GEA BRAND SYSTEM ─── */
+    :root {
+      --gea-navy:     #003087;
+      --gea-blue:     #0066CC;
+      --gea-sky:      #4DA6FF;
+      --gea-slate:    #1A2B4A;
+      --gea-light:    #EBF4FF;
+      --gea-gray:     #F0F4FA;
+      --gea-mid:      #6B7A8D;
+      --gea-white:    #FFFFFF;
+      --sf-orange:    #FF6B00;
+      --sf-orange-lt: #FFF3EB;
+      --green:        #00A651;
+      --green-lt:     #E8F7EE;
+      --amber:        #F5A623;
+      --amber-lt:     #FEF6E7;
+      --red:          #D0021B;
+      --red-lt:       #FDECEA;
+      --radius:       12px;
+      --radius-sm:    8px;
+      --shadow:       0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,48,135,.08);
+      --shadow-lg:    0 4px 8px rgba(0,0,0,.06), 0 12px 40px rgba(0,48,135,.14);
+      --shadow-card:  0 2px 8px rgba(0,0,0,.04), 0 6px 24px rgba(0,48,135,.10);
+      /* Eaton-style additions */
+      --e-navy:       #0A1628;
+      --e-navy-mid:   #162035;
+      --e-blue:       #1B6FD8;
+      --e-blue-dim:   #8AAED8;
+      --font-display: 'Barlow Condensed', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #F0F4FA;
+      color: var(--gea-slate);
+      min-height: 100vh;
+    }
+
+    /* ─── ANIMATED BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 5%, rgba(0,102,204,.07) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 90% 90%, rgba(255,107,0,.05) 0%, transparent 50%),
+        linear-gradient(160deg, #EBF1FA 0%, #F0F4FA 50%, #EDF2F9 100%);
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(0,48,135,.04) 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    /* ─── TOP NAV (Eaton-style) ─── */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--e-navy);
+      border-bottom: 2px solid var(--e-blue);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      height: 46px;
+      gap: 12px;
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .nav-brand em { color: var(--e-blue); font-style: normal; }
+    .nav-spacer { flex: 1; }
+    .btn-nav {
+      display: flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.75);
+      border-radius: 5px;
+      padding: 5px 11px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .btn-nav:hover { background: rgba(255,255,255,.14); color: #fff; }
+    .nav-progress-text { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.55); white-space: nowrap; }
+    .nav-progress-bar { background: rgba(255,255,255,.15); border-radius: 3px; height: 4px; width: 90px; overflow: hidden; }
+    .nav-progress-fill { background: #fff; height: 100%; width: 0%; transition: width .4s; border-radius: 3px; }
+
+    /* ─── HERO SECTION (Eaton-style) ─── */
+    .hero-section {
+      background: var(--e-navy);
+      padding: 48px 32px 42px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-top-stripe {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--e-blue) 0%, #5B9AE8 50%, var(--e-blue) 100%);
+    }
+    .hero-bg-text {
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: 200px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,.028);
+      pointer-events: none;
+      line-height: 1;
+      user-select: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .hero-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hero-split {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+    .hero-left { flex: 1; }
+    .hero-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding-top: 6px;
+      flex-shrink: 0;
+    }
+    .hero-logos {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .hero-logo-img {
+      height: 48px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+    }
+    .hero-logo-sep { color: rgba(255,255,255,.35); font-size: 26px; font-weight: 200; line-height: 1; }
+    .hero-sf-cloud {
+      height: 56px;
+      width: auto;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 80px;
+      font-weight: 800;
+      line-height: .9;
+      letter-spacing: -.01em;
+      color: var(--e-blue);
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+    .hero-year {
+      font-family: var(--font-display);
+      font-size: 80px;
+      font-weight: 800;
+      line-height: .9;
+      letter-spacing: -.01em;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .hero-chips {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 4px 13px;
+      border-radius: 20px;
+    }
+    .chip-date {
+      background: rgba(27,111,216,.2);
+      border: 1px solid rgba(27,111,216,.4);
+      color: #7BB8F8;
+    }
+    .chip-loc { color: #94A3B8; }
+    .hero-divider {
+      height: 1px;
+      background: rgba(255,255,255,.1);
+      margin-bottom: 22px;
+    }
+
+    /* ─── PRIMARY CONTACTS ─── */
+    .contacts-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--e-blue-dim);
+      margin-bottom: 16px;
+    }
+    .contacts-row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+    }
+    .contact-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      color: white;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      border: 2.5px solid rgba(255,255,255,.25);
+      overflow: hidden;
+      position: relative;
+    }
+    .contact-avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .contact-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: #FFFFFF;
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .contact-meta {
+      font-size: 11.5px;
+      color: var(--e-blue-dim);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .contact-phone {
+      font-size: 11.5px;
+      color: var(--e-blue);
+      font-weight: 500;
+    }
+
+    /* ─── TAB BAR (Eaton-style) ─── */
+    .tab-bar {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      padding: 0 28px;
+      overflow-x: auto;
+      position: sticky;
+      top: 46px;
+      z-index: 100;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+    .nav-tab {
+      padding: 13px 16px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #64748B;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all .15s;
+      white-space: nowrap;
+      user-select: none;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .nav-tab:hover { color: #1E293B; }
+    .nav-tab.active {
+      color: var(--e-blue);
+      border-bottom-color: var(--e-blue);
+      font-weight: 700;
+    }
+    .nav-tab-person {
+      color: #7C3AED;
+      background: rgba(124,58,237,.06);
+      border-radius: 6px 6px 0 0;
+      margin-top: 4px;
+    }
+    .nav-tab-person:hover { color: #5B21B6; background: rgba(124,58,237,.12); }
+    .nav-tab-person.active {
+      color: #7C3AED;
+      border-bottom-color: #7C3AED;
+      background: rgba(124,58,237,.08);
+    }
+
+    /* ─── MAIN LAYOUT ─── */
+    .main { max-width: 1160px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ─── NOTES TOOLBAR ─── */
+    .notes-toolbar { display:flex; gap:8px; align-items:center; margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid rgba(0,48,135,.08); }
+    .notes-toolbar-label { font-size:12px; color:var(--gea-mid); font-weight:600; flex:1; }
+    .btn-notes-action { font-size:11.5px; font-weight:600; padding:5px 12px; border-radius:6px; cursor:pointer; border:1px solid; font-family:inherit; transition:all .15s; }
+    .btn-notes-export { background:#F5F7FA; color:var(--gea-slate); border-color:#D0D5DD; }
+    .btn-notes-export:hover { background:#E8EDF3; }
+    .btn-notes-import { background:rgba(255,107,0,.08); color:var(--sf-orange); border-color:rgba(255,107,0,.3); }
+    .btn-notes-import:hover { background:rgba(255,107,0,.14); }
+
+    /* ─── QUESTION EDITOR ─── */
+    .q-list { display:flex; flex-direction:column; gap:10px; }
+    .q-item { background:#F8F9FC; border:1px solid rgba(0,48,135,.07); border-radius:var(--radius-sm); padding:0; position:relative; transition:box-shadow .15s; }
+    .q-item:hover { box-shadow: var(--shadow); }
+    .q-item.q-highlight { background:var(--sf-orange-lt); border-color:rgba(255,107,0,.18); }
+    .q-item-header { display:flex; align-items:flex-start; gap:8px; padding:12px 14px 8px; }
+    .q-drag-handle { cursor:grab; color:#C5CDD8; font-size:14px; padding-top:2px; flex-shrink:0; user-select:none; }
+    .q-drag-handle:active { cursor:grabbing; }
+    .q-item.dragging { opacity:.4; box-shadow:var(--shadow-lg); }
+    .q-item.drag-over { box-shadow:0 -2px 0 0 var(--sf-orange), var(--shadow); }
+    .q-text { font-weight:600; font-size:13.5px; color:var(--gea-slate); flex:1; outline:none; cursor:text; min-height:20px; word-break:break-word; line-height:1.55; white-space:pre-wrap; }
+    .q-text:focus { color:#111; }
+    .q-text:empty:before { content:attr(data-placeholder); color:#B0B8C4; font-weight:400; font-style:italic; }
+    .q-item-actions { display:flex; align-items:center; gap:6px; padding:0 14px 10px 38px; }
+    .q-note-toggle { font-size:11.5px; color:var(--gea-mid); cursor:pointer; background:none; border:none; padding:0; font-family:inherit; }
+    .q-note-toggle:hover { color:var(--sf-orange); }
+    .q-note-area { width:100%; border:none; border-top:1px solid rgba(0,48,135,.07); border-radius:0 0 var(--radius-sm) var(--radius-sm); padding:9px 14px 10px 38px; font-size:12.5px; color:var(--gea-slate); resize:vertical; min-height:60px; font-family:inherit; box-sizing:border-box; display:none; line-height:1.5; background:rgba(255,255,255,.8); }
+    .q-note-area:focus { outline:none; background:#fff; }
+    .q-delete { font-size:13px; color:#C5CDD8; cursor:pointer; background:none; border:none; padding:0; line-height:1; margin-left:4px; }
+    .q-delete:hover { color:#E53935; }
+    .q-add-btn { margin-top:6px; font-size:12.5px; color:var(--sf-orange); background:none; border:1.5px dashed rgba(255,107,0,.30); border-radius:var(--radius-sm); padding:9px 14px; cursor:pointer; width:100%; text-align:left; font-family:inherit; font-weight:600; transition:all .15s; }
+    .q-add-btn:hover { background:rgba(255,107,0,.04); border-color:rgba(255,107,0,.5); }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: rgba(255,255,255,.97);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 26px 30px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(0,48,135,.06);
+    }
+    .card-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      color: var(--gea-navy);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -.2px;
+    }
+    .card-title .icon {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, var(--gea-light), #d4e8ff);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ─── GRID HELPERS ─── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    @media(max-width:780px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .main { padding: 20px 16px 60px; }
+      .header-top { padding: 12px 18px; }
+      .nav-tabs { padding: 0 14px; }
+    }
+
+    /* ─── HERO BAND ─── */
+    .hero {
+      background: linear-gradient(130deg, #07112B 0%, #003087 45%, #0055B3 100%);
+      border-radius: var(--radius);
+      color: white;
+      padding: 36px 40px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow-lg);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -80px; top: -80px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(77,166,255,.15) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: -40px; bottom: -60px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(255,107,0,.10) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+    .hero h2 { font-size: 26px; font-weight: 900; margin-bottom: 8px; position: relative; letter-spacing: -.5px; line-height: 1.15; }
+    .hero p { font-size: 14px; color: rgba(255,255,255,.80); max-width: 640px; line-height: 1.65; position: relative; }
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .hero-meta-item {
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-sm);
+      padding: 10px 18px;
+      backdrop-filter: blur(8px);
+    }
+    .hero-meta-item .label { font-size: 10px; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .8px; font-weight: 600; }
+    .hero-meta-item .value { font-size: 15px; font-weight: 800; margin-top: 2px; letter-spacing: -.2px; }
+
+    /* ─── STAT TILES ─── */
+    .stat-tile {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 22px;
+      text-align: center;
+      border: 1px solid rgba(0,48,135,.06);
+    }
+    .stat-tile .num {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--gea-navy);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    .stat-tile .label {
+      font-size: 12px;
+      color: var(--gea-mid);
+      margin-top: 7px;
+      font-weight: 500;
+    }
+
+    /* ─── BADGES / PILLS ─── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      white-space: nowrap;
+    }
+    .badge-green  { background: #D4F0E0; color: #006B30; }
+    .badge-blue   { background: #DCE9FF; color: #0052A3; }
+    .badge-orange { background: #FFE8D6; color: #CC5500; }
+    .badge-amber  { background: var(--amber-lt); color: #8A6000; }
+    .badge-red    { background: var(--red-lt); color: var(--red); }
+    .badge-gray   { background: #E8ECEF; color: #444; }
+
+    /* ─── TIMELINE ─── */
+    .timeline { list-style: none; }
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      padding-bottom: 22px;
+      position: relative;
+    }
+    .timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 17px; top: 38px;
+      width: 2px; bottom: 0;
+      background: linear-gradient(to bottom, var(--gea-blue), transparent);
+    }
+    .timeline-dot {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--gea-light);
+      border: 2px solid var(--gea-blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .timeline-dot.done { background: var(--green); border-color: var(--green); color: white; }
+    .timeline-dot.hot  { background: var(--sf-orange); border-color: var(--sf-orange); color: white; }
+    .timeline-content .date { font-size: 11px; color: var(--gea-mid); font-weight: 600; margin-bottom: 3px; text-transform: uppercase; letter-spacing: .5px; }
+    .timeline-content .title { font-size: 14px; font-weight: 700; color: var(--gea-slate); }
+    .timeline-content .desc { font-size: 13px; color: var(--gea-mid); margin-top: 4px; line-height: 1.55; }
+
+    /* ─── PERSON CARDS ─── */
+    .person-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .person-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 22px;
+      text-align: center;
+      border: 1px solid rgba(0,48,135,.06);
+      transition: box-shadow .2s;
+    }
+    .person-card:hover { box-shadow: var(--shadow-lg); }
+    .person-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gea-navy), var(--gea-blue));
+      color: white;
+      font-size: 20px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .person-card .name { font-size: 15px; font-weight: 700; color: var(--gea-slate); }
+    .person-card .title { font-size: 12px; color: var(--gea-mid); margin-top: 3px; }
+    .person-card .status { margin-top: 10px; }
+
+    /* ─── AGENDA TABLE ─── */
+    .agenda-day {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid rgba(0,48,135,.06);
+    }
+    .agenda-day-header {
+      background: linear-gradient(90deg, #003087, #0055B3);
+      color: white;
+      padding: 13px 22px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -.1px;
+    }
+    .agenda-row {
+      display: flex;
+      gap: 16px;
+      padding: 13px 22px;
+      border-bottom: 1px solid #F0F4FA;
+      align-items: flex-start;
+      transition: background .12s;
+    }
+    .agenda-row:hover { background: #F8FAFF; }
+    .agenda-row:last-child { border-bottom: none; }
+    .agenda-time {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--gea-blue);
+      min-width: 80px;
+      padding-top: 2px;
+      letter-spacing: -.1px;
+    }
+    .agenda-desc { flex: 1; }
+    .agenda-desc .title { font-size: 13.5px; font-weight: 700; color: var(--gea-slate); }
+    .agenda-desc .sub { font-size: 12px; color: var(--gea-mid); margin-top: 3px; line-height: 1.5; }
+
+    /* ─── LINKS & BUTTONS ─── */
+    a { color: var(--gea-blue); text-decoration: none; font-weight: 600; }
+    a:hover { text-decoration: underline; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none !important;
+      transition: all .15s;
+      letter-spacing: -.1px;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--gea-navy), var(--gea-blue)); color: white; box-shadow: 0 2px 8px rgba(0,48,135,.25); }
+    .btn-primary:hover { box-shadow: 0 4px 16px rgba(0,48,135,.35); transform: translateY(-1px); }
+    .btn-orange { background: linear-gradient(135deg, #FF6B00, #FF8C38); color: white; box-shadow: 0 2px 8px rgba(255,107,0,.30); }
+    .btn-orange:hover { box-shadow: 0 4px 16px rgba(255,107,0,.40); transform: translateY(-1px); }
+    .btn-outline { border: 2px solid var(--gea-navy); color: var(--gea-navy); background: white; }
+    .btn-outline:hover { background: var(--gea-light); }
+
+    /* ─── ALERT BANNER ─── */
+    .alert {
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .alert-body .title { font-weight: 700; font-size: 14px; }
+    .alert-body .desc { font-size: 13px; margin-top: 3px; line-height: 1.55; }
+    .alert-warning { background: var(--amber-lt); border-left: 4px solid var(--amber); }
+    .alert-success { background: var(--green-lt); border-left: 4px solid var(--green); }
+    .alert-info    { background: var(--gea-light); border-left: 4px solid var(--gea-blue); }
+    .alert-urgent  { background: var(--red-lt); border-left: 4px solid var(--red); }
+
+    /* ─── TABLE ─── */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: linear-gradient(90deg, #EBF4FF, #F5F9FF); color: var(--gea-navy); font-weight: 700; padding: 11px 14px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+    td { padding: 11px 14px; border-bottom: 1px solid #F0F4FA; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #F8FAFF; }
+
+    /* ─── CHECKLIST ─── */
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      gap: 10px;
+      padding: 9px 6px;
+      border-bottom: 1px solid #F0F4FA;
+      font-size: 13.5px;
+      align-items: flex-start;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 6px;
+      transition: background .12s;
+      position: relative;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li:hover { background: #F5F8FF; }
+    .check-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .check-done .check-icon::before { content: '✅'; }
+    .check-pending .check-icon::before { content: '⏳'; }
+    .check-action .check-icon::before { content: '🔴'; }
+    .check-tbd .check-icon::before { content: '❓'; }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--gea-navy);
+      letter-spacing: -.4px;
+    }
+    .section-header p {
+      font-size: 13px;
+      color: var(--gea-mid);
+      margin-top: 4px;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider { border: none; border-top: 1px solid #E8EEF6; margin: 22px 0; }
+
+    /* ─── STATUS PICKER ─── */
+    .status-picker {
+      -webkit-appearance: none;
+      appearance: none;
+      border: none;
+      border-radius: 20px;
+      padding: 5px 24px 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      cursor: pointer;
+      outline: none;
+      background-repeat: no-repeat;
+      background-position: right 7px center;
+      background-size: 8px 5px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='rgba(0,0,0,0.25)'/%3E%3C/svg%3E");
+      transition: filter .15s, box-shadow .15s;
+      min-width: 120px;
+      max-width: 180px;
+    }
+    .status-picker:hover { filter: brightness(.92); }
+    .status-picker:focus { box-shadow: 0 0 0 2px rgba(0,102,204,.3); }
+    .sp-red    { background-color: #FDECEA; color: #D0021B; }
+    .sp-amber  { background-color: #FEF6E7; color: #A07000; }
+    .sp-green  { background-color: #E8F7EE; color: #007A3D; }
+    .sp-blue   { background-color: #EBF4FF; color: #0066CC; }
+    .sp-orange { background-color: #FFF0E6; color: #FF6B00; }
+    .sp-gray   { background-color: #EDEFF2; color: #555;    }
+
+    /* ─── PROGRESS BAR ─── */
+    .progress-pill {
+      background: rgba(0,48,135,.07);
+      border: 1px solid rgba(0,48,135,.15);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gea-navy);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .progress-bar-track {
+      width: 70px;
+      height: 5px;
+      background: rgba(0,48,135,.12);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), #00C96A);
+      border-radius: 3px;
+      transition: width .4s ease;
+    }
+    .reset-btn {
+      background: rgba(0,48,135,.05);
+      border: 1px solid rgba(0,48,135,.18);
+      color: var(--gea-mid);
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .reset-btn:hover { background: rgba(0,48,135,.10); color: var(--gea-navy); }
+
+    /* ─── HIGHLIGHT PILLS ─── */
+    .highlight-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+    .highlight-pill {
+      background: rgba(255,255,255,.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gea-slate);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(0,48,135,.08);
+    }
+
+    /* ─── CODE BLOCK ─── */
+    .code-block {
+      background: #0F1E35;
+      color: #7DD3FC;
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      letter-spacing: .5px;
+      margin: 8px 0;
+    }
+
+    /* ─── SESSION CARD ─── */
+    .session-card {
+      border-left: 4px solid var(--gea-blue);
+      background: white;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: var(--shadow-card);
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      border-top: 1px solid rgba(0,48,135,.06);
+      border-bottom: 1px solid rgba(0,48,135,.06);
+      border-right: 1px solid rgba(0,48,135,.06);
+    }
+    .session-card.orange { border-left-color: var(--sf-orange); }
+    .session-card.green  { border-left-color: var(--green); }
+    .session-time { font-size: 12px; color: var(--gea-mid); font-weight: 600; margin-bottom: 4px; }
+    .session-title { font-size: 15px; font-weight: 700; color: var(--gea-slate); }
+    .session-desc  { font-size: 13px; color: var(--gea-mid); margin-top: 6px; line-height: 1.55; }
+
+    /* ─── OPP ITEMS ─── */
+    .opp-item {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      border: 1px solid rgba(0,48,135,.06);
+    }
+    .opp-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--gea-light), #d4e8ff);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .opp-body { flex: 1; }
+    .opp-body .title { font-size: 14px; font-weight: 700; color: var(--gea-slate); }
+    .opp-body .desc { font-size: 13px; color: var(--gea-mid); margin-top: 4px; line-height: 1.55; }
+
+    /* ─── SECTION HEADER ─── */
+    .section-head { display:flex; align-items:center; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
+    .section-title { font-family:var(--font-display); font-size:26px; font-weight:700; color:var(--gea-slate); margin:0; letter-spacing:-.01em; }
+    .section-note { font-size:13px; color:var(--gea-mid); }
+    .pill { display:inline-flex; align-items:center; background:var(--gea-light); color:var(--gea-blue); font-size:12px; font-weight:700; padding:3px 10px; border-radius:20px; border:1px solid rgba(0,102,204,.2); }
+
+    /* ─── ATTENDEE GRID ─── */
+    .attendee-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:16px; }
+    .att-card { display:flex; align-items:flex-start; gap:14px; background:white; border:1px solid rgba(0,48,135,.1); border-radius:10px; padding:16px 18px; }
+    .avatar { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:15px; font-weight:700; color:white; flex-shrink:0; letter-spacing:.04em; overflow:hidden; position:relative; }
+    .avatar img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    .li-link { display:inline-flex; align-items:center; gap:4px; margin-top:6px; font-size:11.5px; font-weight:600; color:#0A66C2; text-decoration:none; opacity:.85; }
+    .li-link:hover { opacity:1; }
+    .att-name { font-size:15px; font-weight:700; color:var(--gea-slate); margin-bottom:3px; }
+    .att-title { font-size:12.5px; color:var(--gea-mid); line-height:1.4; }
+    .tag-row { margin-top:7px; display:flex; gap:6px; flex-wrap:wrap; }
+    .tag { font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; letter-spacing:.04em; }
+    .t-speaker { background:rgba(0,102,204,.1); color:var(--gea-blue); }
+    .t-exec { background:rgba(245,166,35,.12); color:#8A5A00; }
+
+    /* ─── SESSION CARDS (Speaking) ─── */
+    .session-grid { display:grid; gap:20px; }
+    .sess-card { background:white; border:1px solid rgba(0,48,135,.12); border-radius:10px; padding:20px 24px; }
+    .sess-confirmed { border-left:4px solid #16A34A; }
+    .sess-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+    .sess-type-badge { font-size:11.5px; font-weight:700; color:var(--gea-mid); background:#F3F4F6; padding:3px 10px; border-radius:4px; }
+    .sess-status { font-size:12px; font-weight:700; }
+    .sess-status.confirmed { color:#16A34A; }
+    .sess-status.pending { color:#6B7A8D; }
+    .sess-pending { border-left:4px solid #D1D5DB; }
+    .sess-title { font-size:20px; font-weight:700; color:var(--gea-slate); margin-bottom:14px; }
+    .sess-fields { display:grid; gap:8px; }
+    .sess-field { display:grid; grid-template-columns:100px 1fr; gap:8px; font-size:13px; }
+    .sess-label { font-weight:700; color:var(--gea-mid); }
+    .sess-value { color:var(--gea-slate); line-height:1.55; }
+
+    /* ─── KEYNOTE CARDS ─── */
+    .keynote-list { display:grid; gap:16px; }
+    .keynote-card { background:white; border:1px solid rgba(0,48,135,.1); border-radius:10px; padding:18px 22px; }
+    .keynote-head { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .keynote-badge { font-size:11.5px; font-weight:700; background:var(--gea-navy); color:white; padding:3px 10px; border-radius:4px; }
+    .keynote-level { font-size:11.5px; color:var(--gea-mid); font-weight:600; }
+    .keynote-title { font-size:17px; font-weight:700; color:var(--gea-slate); margin-bottom:8px; }
+    .keynote-desc { font-size:13.5px; color:#444; line-height:1.65; margin-bottom:10px; }
+    .keynote-speaker { font-size:12.5px; color:var(--gea-mid); font-style:italic; margin-bottom:10px; }
+    .keynote-meta-row { display:flex; flex-wrap:wrap; gap:6px; }
+    .k-tag { font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; }
+    .k-format { background:#EFF6FF; color:#1D4ED8; }
+    .k-product { background:#F0FDF4; color:#15803D; }
+    .k-role { background:#FFF7ED; color:#C2410C; }
+    .k-industry { background:#FAF5FF; color:#7C3AED; }
+    .k-topic { background:#F0F9FF; color:#0369A1; }
+    .k-priority { background:rgba(245,166,35,.15); color:#8A5A00; font-weight:800; }
+
+    /* ─── PARTNER EVENTS ─── */
+    .partner-day { margin-bottom:36px; }
+    .day-head { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+    .day-label { font-family:var(--font-display); font-size:13px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; background:var(--gea-navy); color:white; padding:4px 12px; border-radius:4px; }
+    .day-date { font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--gea-slate); }
+    .day-dow { font-weight:400; color:var(--gea-mid); }
+    .day-rule { flex:1; height:1px; background:rgba(0,48,135,.12); }
+    .partner-events-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:14px; }
+    .partner-card { background:white; border:1px solid rgba(0,48,135,.1); border-radius:10px; padding:16px 18px; display:flex; flex-direction:column; gap:6px; }
+    .partner-card.recommended { border-color:var(--amber); box-shadow:0 2px 8px rgba(245,166,35,.12); }
+    .partner-name { font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--gea-mid); }
+    .partner-event-name { font-size:15px; font-weight:700; color:var(--gea-slate); line-height:1.3; }
+    .partner-meta { display:flex; flex-direction:column; gap:3px; font-size:12.5px; color:var(--gea-mid); }
+    .partner-reg-link { margin-top:auto; font-size:12.5px; font-weight:600; color:var(--gea-blue); text-decoration:none; }
+    .partner-reg-link:hover { text-decoration:underline; }
+    .partner-reg-pending { font-size:12px; font-weight:700; color:var(--gea-mid); opacity:.7; margin-top:auto; }
+    .microsite-section { margin-top:32px; background:var(--gea-light); border:1px solid rgba(0,102,204,.15); border-radius:10px; padding:20px 24px; }
+    .microsite-label { font-family:var(--font-display); font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--gea-navy); margin-bottom:4px; }
+    .microsite-list { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px; }
+    .microsite-card { display:flex; flex-direction:column; gap:4px; background:white; border:1px solid rgba(0,102,204,.15); border-radius:8px; padding:14px 16px; text-decoration:none; transition:box-shadow .15s; }
+    .microsite-card:hover { box-shadow:0 2px 8px rgba(0,48,135,.12); }
+    .microsite-name { font-size:14px; font-weight:700; color:var(--gea-slate); }
+    .microsite-desc { font-size:12px; color:var(--gea-mid); }
+
+    /* ─── KNOW BEFORE YOU GO ─── */
+    .kbyg-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; margin-bottom:28px; }
+    .kbyg-card { background:white; border:1px solid rgba(0,48,135,.1); border-radius:10px; padding:20px 22px; }
+    .kbyg-card h3 { font-size:15px; font-weight:700; color:var(--gea-slate); margin:0 0 12px 0; }
+    .kbyg-card ul { margin:0; padding-left:18px; font-size:13.5px; color:#444; line-height:1.75; }
+    .kbyg-card li { margin-bottom:8px; }
+    .venue-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:14px; margin-bottom:28px; }
+    .venue-card { background:white; border:1px solid rgba(0,48,135,.1); border-radius:10px; padding:16px 18px; }
+    .venue-card h4 { font-size:14px; font-weight:700; color:var(--gea-navy); margin:0 0 8px 0; }
+    .venue-card p { font-size:13px; color:#555; margin:0; line-height:1.6; }
+    .tips-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:14px; margin-bottom:28px; }
+    .tip-card { background:white; border:1px solid rgba(0,48,135,.1); border-radius:10px; padding:16px 18px; }
+    .tip-card h4 { font-size:14px; font-weight:700; color:var(--gea-slate); margin:0 0 8px 0; }
+    .tip-card p { font-size:13px; color:#555; margin:0; line-height:1.6; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════ TOP NAV -->
+<nav class="top-nav">
+  <span class="nav-brand">GEA · <em>DF26</em></span>
+  <div class="nav-spacer"></div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ HERO -->
+<div class="hero-section">
+  <div class="hero-top-stripe"></div>
+  <div class="hero-bg-text">DREAMFORCE</div>
+  <div class="hero-inner">
+    <div class="hero-split">
+      <div class="hero-left">
+        <div class="hero-title">DREAMFORCE</div>
+        <div class="hero-year">2026</div>
+        <div class="hero-chips">
+          <span class="chip chip-date">Sept 14–17, 2026</span>
+          <span class="chip chip-loc">⊙ San Francisco · Moscone Center</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-logos">
+          <img src="sf-logo.png" alt="Salesforce" class="hero-sf-cloud">
+          <span class="hero-logo-sep">+</span>
+          <img src="gea-logo.png" alt="GE Appliances" class="hero-logo-img">
+        </div>
+      </div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="contacts-label">Primary Contacts</div>
+    <div class="contacts-row">
+      <div class="contact-item">
+        <div class="contact-avatar" style="background:linear-gradient(135deg,#003087,#1B6FD8);border-color:#4A90D9;">
+          <img src="photos/mike-warren.jpg" alt="Mike Warren" onerror="this.style.display='none'">
+          MW
+        </div>
+        <div>
+          <div class="contact-name">Mike Warren</div>
+          <div class="contact-meta">Strategic Account Director<br>Onsite</div>
+          <div class="contact-phone">(332) 295-0807</div>
+          <a href="https://www.linkedin.com/in/michaelwarren44/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-avatar" style="background:linear-gradient(135deg,#0A8A52,#10B981);border-color:#34D399;">
+          <img src="photos/chrissy-campi.jpg" alt="Chrissy Campi" onerror="this.style.display='none'">
+          CC
+        </div>
+        <div>
+          <div class="contact-name">Chrissy Campi</div>
+          <div class="contact-meta">VP, Manufacturing<br>Onsite</div>
+          <a href="https://www.linkedin.com/in/chrissy-campi-27757931/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-avatar" style="background:linear-gradient(135deg,#C2410C,#F97316);border-color:#FB923C;">
+          <img src="photos/matt-amos.jpg" alt="Matt Amos" onerror="this.style.display='none'">
+          MA
+        </div>
+        <div>
+          <div class="contact-name">Matt Amos</div>
+          <div class="contact-meta">Principal, Account SE<br>Remote</div>
+          <a href="https://www.linkedin.com/in/matthewamos/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-avatar" style="background:linear-gradient(135deg,#7C3AED,#A78BFA);border-color:#A78BFA;">
+          <img src="photos/kemi-le.png" alt="Kemi Le" onerror="this.style.display='none'">
+          KL
+        </div>
+        <div>
+          <div class="contact-name">Kemi Le</div>
+          <div class="contact-meta">Signature Success<br>Remote</div>
+          <a href="https://www.linkedin.com/in/kemile/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;">
+        <div class="contact-avatar" style="background:linear-gradient(135deg,#065F46,#059669);border-color:#34D399;">
+          <img src="photos/tony-knight.png" alt="Tony Knight" onerror="this.style.display='none'">
+          TK
+        </div>
+        <div>
+          <div class="contact-name">Tony Knight</div>
+          <div class="contact-meta">Data Foundation AE<br>Remote</div>
+          <a href="https://www.linkedin.com/in/anthonyknight/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ TAB BAR -->
+<nav class="tab-bar">
+  <div class="nav-tab active" onclick="show('attendees')">Home</div>
+  <div class="nav-tab" onclick="show('speaking')">GEA Speaking Sessions</div>
+  <div class="nav-tab" onclick="show('sics')">GEA SICs</div>
+  <div class="nav-tab" onclick="show('keynotes')">Keynotes &amp; Sessions</div>
+  <div class="nav-tab" onclick="show('partner-events')">Partner Events</div>
+  <div class="nav-tab" onclick="show('know-before')">Know Before You Go</div>
+  <div class="nav-tab nav-tab-person" onclick="show('full-team')">Full Team</div>
+  <div class="nav-tab nav-tab-person" onclick="show('mandar')">Mandar Deo</div>
+  <div class="nav-tab nav-tab-person" onclick="show('jason')">Jason West</div>
+  <div class="nav-tab nav-tab-person" onclick="show('sam')">Sam Seelam</div>
+</nav>
+
+<main class="main">
+
+  <!-- ══════════════════════ SECTION: ATTENDEES -->
+  <div id="attendees" class="section active">
+
+    <div class="section-head" style="margin-top:0;">
+      <h2 class="section-title">Home</h2>
+      <span class="pill">6 confirmed</span>
+    </div>
+
+    <div class="attendee-grid">
+
+      <div class="att-card">
+        <div class="avatar" style="background:#1B6FD8;"><img src="photos/mandar-deo.jpg" alt="Mandar Deo" onerror="this.style.display='none'">MD</div>
+        <div>
+          <div class="att-name">Mandar Deo</div>
+          <div class="att-title">Chief Digital Officer</div>
+          <div class="tag-row"><span class="tag t-exec">Executive Summit</span></div>
+          <a href="https://www.linkedin.com/in/mandar-deo-74915817/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="att-card">
+        <div class="avatar" style="background:#374151;"><img src="photos/sean-jackson.jpg" alt="Sean Jackson" onerror="this.style.display='none'">SJ</div>
+        <div>
+          <div class="att-name">Sean Jackson</div>
+          <div class="att-title">Director, eCommerce Shared Services</div>
+          <a href="https://www.linkedin.com/in/sean-jackson-52b18011/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="att-card">
+        <div class="avatar" style="background:#374151;"><img src="photos/eric-johnson.jpg" alt="Eric Johnson" onerror="this.style.display='none'">EJ</div>
+        <div>
+          <div class="att-name">Eric Johnson</div>
+          <div class="att-title">Sr Director, Zero Distance</div>
+          <div class="tag-row"><span class="tag t-speaker">Speaker</span></div>
+          <a href="https://www.linkedin.com/in/eric-johnson-307a34182/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="att-card">
+        <div class="avatar" style="background:#374151;"><img src="photos/samuel-seelam.jpg" alt="Samuel Seelam" onerror="this.style.display='none'">SS</div>
+        <div>
+          <div class="att-name">Samuel Seelam</div>
+          <div class="att-title">VP and Executive Director — Global Infra &amp; Ops</div>
+          <div class="tag-row"><span class="tag t-speaker">Speaker</span></div>
+          <a href="https://www.linkedin.com/in/samuelseelam/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="att-card">
+        <div class="avatar" style="background:#374151;"><img src="photos/chuck-weaver.jpg" alt="Chuck Weaver" onerror="this.style.display='none'">CW</div>
+        <div>
+          <div class="att-name">Chuck Weaver</div>
+          <div class="att-title">Program Director</div>
+          <div class="tag-row"><span class="tag t-speaker">Speaker</span></div>
+          <a href="https://www.linkedin.com/in/chuck-weaver/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="att-card">
+        <div class="avatar" style="background:#374151;"><img src="photos/jason-west.jpg" alt="Jason West" onerror="this.style.display='none'">JW</div>
+        <div>
+          <div class="att-name">Jason West</div>
+          <div class="att-title">VP Commercial Strategy &amp; Transformation</div>
+          <a href="https://www.linkedin.com/in/jason-west-939759a/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="att-card">
+        <div class="avatar" style="background:#374151;"><img src="photos/adam-jones.jpg" alt="Adam Jones" onerror="this.style.display='none'">AJ</div>
+        <div>
+          <div class="att-name">Adam Jones</div>
+          <div class="att-title">Executive Director, Enterprise Transformation</div>
+          <a href="https://www.linkedin.com/in/adamkjones/" target="_blank" class="li-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="background:white;border:1px solid rgba(22,163,74,.25);border-radius:10px;padding:20px 24px;margin-top:24px;margin-bottom:24px;box-shadow:0 2px 8px rgba(22,163,74,.06);">
+      <div style="font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#16A34A;margin-bottom:14px;">Salesforce Account Team Hosted Meals — Confirmed</div>
+      <p style="font-size:13.5px;color:var(--gea-slate);line-height:1.6;margin-bottom:16px;">Salesforce would like to host the GEA team at the following meals during Dreamforce week. We look forward to connecting outside of the conference halls.</p>
+      <div style="display:grid;gap:12px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;background:#F9FFF9;border:1px solid rgba(22,163,74,.15);border-radius:8px;padding:14px 16px;">
+          <div style="font-size:22px;flex-shrink:0;">🍝</div>
+          <div>
+            <div style="font-weight:700;font-size:15px;color:var(--gea-slate);margin-bottom:3px;"><a href="https://www.amanosf.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Lunch — a Mano</a></div>
+            <div style="font-size:13px;color:var(--gea-mid);margin-bottom:4px;">Tuesday, September 15 · 12:30–2:00 PM</div>
+            <div style="font-size:13px;color:#555;"><a href="https://maps.google.com/?q=450+Hayes+St+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">450 Hayes St, San Francisco</a> · (415) 506-7401</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;background:#F9FFF9;border:1px solid rgba(22,163,74,.15);border-radius:8px;padding:14px 16px;">
+          <div style="font-size:22px;flex-shrink:0;">🍛</div>
+          <div>
+            <div style="font-weight:700;font-size:15px;color:var(--gea-slate);margin-bottom:3px;"><a href="https://www.amber-india.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Dinner — Amber India</a></div>
+            <div style="font-size:13px;color:var(--gea-mid);margin-bottom:4px;">Wednesday, September 16 · 6:00–8:00 PM</div>
+            <div style="font-size:13px;color:#555;"><a href="https://maps.google.com/?q=25+Yerba+Buena+Lane+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">25 Yerba Buena Lane, San Francisco</a> · (415) 777-0500</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:white;border:1px solid rgba(0,48,135,.12);border-radius:10px;padding:28px 32px;max-width:760px;margin-bottom:24px;">
+      <div style="font-size:18px;font-weight:700;color:var(--gea-slate);margin-bottom:16px;">It's time to start building Dreamforce agendas!</div>
+      <p style="font-size:14px;color:var(--gea-slate);line-height:1.7;margin-bottom:20px;">
+        Session times, locations, and the new <a href="https://www.salesforce.com/dreamforce/my-agenda/" target="_blank">My Agenda</a> page are here to help the GEA team build their ideal three-day experience.
+      </p>
+      <ul style="font-size:14px;color:var(--gea-slate);line-height:1.7;margin-bottom:20px;padding-left:20px;">
+        <li style="margin-bottom:12px;"><strong>My Agenda</strong>, the Dreamforce scheduling hub, includes AI-powered session recommendations, favorited sessions, and your confirmed meetings (SICs, roundtables, and sponsor sessions). Use Ask Agentforce for personalized recommendations!</li>
+        <li><strong>Reminder:</strong> Reserve seats in certifications, roundtables, and hands-on trainings — act fast, space is limited! Breakouts, keynotes, and theater sessions are first come, first seated.</li>
+      </ul>
+      <div style="background:var(--amber-lt);border:1px solid #FCD34D;border-radius:8px;padding:14px 18px;font-size:14px;font-weight:600;color:#8A5A00;">
+        Please take a few minutes ASAP to reserve those seats — especially for SICs, the Manufacturing Roundtable, and GEA's confirmed speaking sessions!
+      </div>
+    </div>
+
+    <div style="background:white;border:1px solid rgba(0,48,135,.12);border-radius:10px;padding:20px 24px;margin-bottom:24px;">
+      <div style="font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gea-mid);margin-bottom:10px;">Sept 14 Monday — Badge Pick Up Day</div>
+      <div style="font-size:14px;color:var(--gea-slate);">Monday, September 14th is badge pick up day. Pick up your badge at Moscone West before the conference begins.</div>
+    </div>
+
+    <div style="background:white;border:1px solid rgba(245,166,35,.4);border-radius:10px;padding:20px 24px;margin-bottom:24px;box-shadow:0 2px 8px rgba(245,166,35,.06);">
+      <div style="font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;">Evening Options</div>
+      <div style="font-size:13px;color:var(--gea-mid);margin-bottom:16px;"><strong style="color:#c0392b;">Action needed:</strong> GEA team confirmation required ASAP on dinner options below.</div>
+      <div style="display:grid;gap:12px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;background:#FFFBF0;border:1px solid rgba(245,166,35,.2);border-radius:8px;padding:14px 16px;">
+          <div style="font-size:22px;flex-shrink:0;">🍽️</div>
+          <div style="flex:1;">
+            <div style="font-weight:700;font-size:15px;color:var(--gea-slate);margin-bottom:3px;">Salesforce Data Foundation VIP Appreciation Dinner</div>
+            <div style="font-size:13px;color:var(--gea-mid);margin-bottom:4px;">Monday, September 14 · 5:30 PM</div>
+            <div style="font-size:13px;color:#555;margin-bottom:4px;">STK · 1 Market Street, San Francisco</div>
+            <div style="font-size:12.5px;color:var(--gea-mid);line-height:1.6;">Peer-to-peer networking with Salesforce Data Foundation VIP guests. Hosted by Michelle Teel, VP Data Foundation.</div>
+          </div>
+          <span style="margin-left:auto;flex-shrink:0;font-size:11px;font-weight:600;color:var(--amber);background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3);border-radius:12px;padding:3px 10px;white-space:nowrap;">Confirm to Mike Warren ASAP</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:white;border:1px solid var(--gea-blue);border-radius:10px;padding:20px 24px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,102,204,.08);">
+      <div style="font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gea-blue);margin-bottom:10px;">Day 2 — Manufacturing Pre-Dreamfest Reception</div>
+      <div style="font-size:16px;font-weight:700;color:var(--gea-slate);margin-bottom:6px;">Manufacturing Pre-Dreamfest Reception @ ATWater Tavern</div>
+      <div style="font-size:14px;color:var(--gea-mid);margin-bottom:10px;">Wednesday, Sept 16 · 5:00–8:00 PM · ATWater Tavern, San Francisco</div>
+      <div style="font-size:14px;color:var(--gea-slate);margin-bottom:12px;">Before heading to Dreamfest, join us at ATWater Tavern — on the water, just a short walk from Oracle Park. Attendees enjoy food, drinks, and networking with one another and Salesforce leadership.</div>
+      <a href="https://invite.salesforce.com/predreamfesthappyhour-0584" target="_blank" style="display:inline-block;font-size:13px;font-weight:600;color:var(--gea-blue);text-decoration:none;border:1px solid var(--gea-blue);border-radius:6px;padding:6px 14px;">Register →</a>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════ SECTION: SPEAKING SESSIONS -->
+  <div id="speaking" class="section">
+    <div class="section-head">
+      <h2 class="section-title">GEA Speaking Sessions</h2>
+      <span class="pill">3 sessions</span>
+      <span class="section-note">Confirmed GEA speaking engagements at Dreamforce</span>
+    </div>
+
+    <div class="session-grid">
+
+      <div class="sess-card sess-confirmed">
+        <div class="sess-header">
+          <span class="sess-type-badge">Manufacturing Roundtable</span>
+          <span class="sess-status confirmed">✓ Confirmed</span>
+        </div>
+        <div class="sess-title">Stop Revenue Leakage with AI-Powered Warranties</div>
+        <div class="sess-fields">
+          <div class="sess-field"><span class="sess-label">Date/Time</span><span class="sess-value">Wednesday, Sept 16 · 12:00–1:00 PM (arrive by 11:40 AM)</span></div>
+          <div class="sess-field"><span class="sess-label">Location</span><span class="sess-value">InterContinental Hotel, InterCon, L5, InterCon Ballroom C, Roundtable 10</span></div>
+          <div class="sess-field"><span class="sess-label">Format</span><span class="sess-value">60-min roundtable with GEA as featured speaker</span></div>
+          <div class="sess-field"><span class="sess-label">Speaker</span><span class="sess-value">Eric Johnson — Sr. Director, Zero Distance</span></div>
+          <div class="sess-field"><span class="sess-label">Content</span><span class="sess-value">Protect revenue across the warranty lifecycle — agentic AI auto-adjudicating claims, validating accuracy, and capturing supplier recovery to protect margins.</span></div>
+          <div class="sess-field"><span class="sess-label">SF Hosts</span><span class="sess-value">Nanda Chitrala (Snr Director Industry Solutions &amp; Strategy) · Lance Fettig (Snr Director Industry Advisor) · Mark Schmidt (Industry Solutions &amp; Strategy Snr Director, Manufacturing)</span></div>
+        </div>
+      </div>
+
+      <div class="sess-card sess-confirmed">
+        <div class="sess-header">
+          <span class="sess-type-badge">Manufacturing Breakout Session</span>
+          <span class="sess-status confirmed">✓ Confirmed</span>
+        </div>
+        <div class="sess-title">Transform Manufacturing Service with Proactive AI</div>
+        <div class="sess-fields">
+          <div class="sess-field"><span class="sess-label">Date/Time</span><span class="sess-value">Wednesday, Sept 16 · 3:30–4:10 PM (arrive by 3:10 PM)</span></div>
+          <div class="sess-field"><span class="sess-label">Location</span><span class="sess-value">Moscone South, LL, Content Pavilion, Stage 2</span></div>
+          <div class="sess-field"><span class="sess-label">Format</span><span class="sess-value">40-min breakout + 10-min customer panel Q&amp;A</span></div>
+          <div class="sess-field"><span class="sess-label">Speaker</span><span class="sess-value">Chuck Weaver — Program Director</span></div>
+          <div class="sess-field"><span class="sess-label">Panel Q&amp;A</span><span class="sess-value">Moderator: Nick Kitchell (AVP of Service, Salesforce) · Saint-Gobain: Zain Syed (confirmed) · GEA: Chuck Weaver</span></div>
+          <div class="sess-field"><span class="sess-label">Content</span><span class="sess-value">Discover GEA's agentic AI innovations across field ops — install base, service cases, warranties, inventory, work orders, and depot repair to boost margins and reinvent field operations.</span></div>
+          <div class="sess-field"><span class="sess-label">SF Host</span><span class="sess-value">Nanda Chitrala, Snr Director Industry Solutions &amp; Strategy, Manufacturing</span></div>
+        </div>
+      </div>
+
+    </div>
+
+      <div class="sess-card sess-pending">
+        <div class="sess-header">
+          <span class="sess-type-badge">Manufacturing Breakout Session</span>
+          <span class="sess-status pending">◌ Pending Confirmation</span>
+        </div>
+        <div class="sess-title">Voice to Form: Modernizing Field Data Capture with AI</div>
+        <div class="sess-fields">
+          <div class="sess-field"><span class="sess-label">Date/Time</span><span class="sess-value">To be confirmed soon</span></div>
+          <div class="sess-field"><span class="sess-label">Location</span><span class="sess-value">To be confirmed soon</span></div>
+          <div class="sess-field"><span class="sess-label">Format</span><span class="sess-value">45-min breakout session</span></div>
+          <div class="sess-field"><span class="sess-label">Speaker</span><span class="sess-value">Chuck Weaver — Program Director</span></div>
+          <div class="sess-field"><span class="sess-label">Content</span><span class="sess-value">How GE Appliances is modernizing field data collection — replacing legacy forms with AI-powered voice-to-structured-data capture for service technicians.</span></div>
+          <div class="sess-field"><span class="sess-label">SF PoC</span><span class="sess-value">Jordyn Allen · Nanda Chitrala + Cynthia Turner (Mfg Cloud)</span></div>
+          <div class="sess-field"><span class="sess-label">Next Steps</span><span class="sess-value">Sara &amp; Chris (GEA comms) approving internally. Technical scoping underway.</span></div>
+        </div>
+      </div>
+  </div>
+
+  <!-- ══════════════════════ SECTION: GEA SICs -->
+  <div id="sics" class="section">
+    <div class="section-head">
+      <h2 class="section-title">GEA SICs</h2>
+      <span class="pill">3 confirmed · 1 pending</span>
+      <span class="section-note">Strategic Innovation Conversations with Salesforce product leadership</span>
+    </div>
+
+    <div class="session-grid">
+
+      <div class="sess-card sess-confirmed">
+        <div class="sess-header">
+          <span class="sess-type-badge">SIC — Strategic Innovation Conversation</span>
+          <span class="sess-status confirmed">✓ Confirmed</span>
+        </div>
+        <div class="sess-title">Field Service SIC</div>
+        <div class="sess-fields">
+          <div class="sess-field"><span class="sess-label">Date/Time</span><span class="sess-value">Tuesday, Sept 15 · 2:30–2:55 PM</span></div>
+          <div class="sess-field"><span class="sess-label">Location</span><span class="sess-value">Executive Meeting Suite 078 · Moscone South, Upper Mezzanine Level, Esplanade Ballrooms</span></div>
+          <div class="sess-field"><span class="sess-label">GEA Attendees</span><span class="sess-value">Mandar Deo · Eric Johnson · Samuel Seelam · Chuck Weaver · Sean Jackson · Jason West</span></div>
+          <div class="sess-field"><span class="sess-label">SF Hosts</span><span class="sess-value">Taksina Eammano (EVP &amp; GM, Field Service) · Nick Kitchell · Chrissy Campi · Shiva Bhajekar · Thomas Hickey</span></div>
+          <div class="sess-field"><span class="sess-label">Focus</span><span class="sess-value">Field Service product + engineering leadership deep-dive. GEA's 4M+ service appointments per year — AI, proactive service, and install base intelligence.</span></div>
+        </div>
+      </div>
+
+      <div class="sess-card sess-confirmed">
+        <div class="sess-header">
+          <span class="sess-type-badge">SIC — Strategic Innovation Conversation</span>
+          <span class="sess-status confirmed">✓ Confirmed</span>
+        </div>
+        <div class="sess-title">GEA Analytics SIC</div>
+        <div class="sess-fields">
+          <div class="sess-field"><span class="sess-label">Date/Time</span><span class="sess-value">Tuesday, Sept 15 · 3:00–3:55 PM</span></div>
+          <div class="sess-field"><span class="sess-label">Location</span><span class="sess-value">Executive Meeting Suite 047 · Moscone South, Upper Mezzanine Level, Esplanade Ballrooms</span></div>
+          <div class="sess-field"><span class="sess-label">GEA Attendees</span><span class="sess-value">Mandar Deo · Eric Johnson · Samuel Seelam · Chuck Weaver · Sean Jackson · Jason West</span></div>
+          <div class="sess-field"><span class="sess-label">SF Hosts</span><span class="sess-value">Justin Wymore · Nathan Nichols · Lauren Beaubien · Shiva Bhajekar · Erin Schwab</span></div>
+          <div class="sess-field"><span class="sess-label">Focus</span><span class="sess-value">Salesforce product leadership session on GEA's analytics journey — full team.</span></div>
+        </div>
+      </div>
+
+      <div class="sess-card sess-confirmed">
+        <div class="sess-header">
+          <span class="sess-type-badge">SIC — Strategic Innovation Conversation</span>
+          <span class="sess-status confirmed">✓ Confirmed</span>
+        </div>
+        <div class="sess-title">B2B &amp; B2C Commerce SIC</div>
+        <div class="sess-fields">
+          <div class="sess-field"><span class="sess-label">Date/Time</span><span class="sess-value">Wednesday, Sept 16 · 4:00–4:55 PM</span></div>
+          <div class="sess-field"><span class="sess-label">Location</span><span class="sess-value">Executive Meeting Suite 087 · Moscone South, Upper Mezzanine Level, Esplanade Ballrooms</span></div>
+          <div class="sess-field"><span class="sess-label">GEA Attendees</span><span class="sess-value">Mandar Deo · Eric Johnson · Chuck Weaver · Sean Jackson · Samuel Seelam · Jason West</span></div>
+          <div class="sess-field"><span class="sess-label">SF Hosts</span><span class="sess-value">Nitin Mangtani · David McNally · Govinda Sambamurthy · Shiva Bhajekar · Chrissy Campi</span></div>
+          <div class="sess-field"><span class="sess-label">Focus</span><span class="sess-value">B2B Commerce product roadmap deep-dive with Salesforce Commerce leadership. Profile portal, Bodewell B2B channel, and agentic commerce strategy.</span></div>
+        </div>
+      </div>
+
+      <div class="sess-card sess-pending">
+        <div class="sess-header">
+          <span class="sess-type-badge">SIC — Strategic Innovation Conversation</span>
+          <span class="sess-status pending">◌ Pending Confirmation</span>
+        </div>
+        <div class="sess-title">Observability / Digital Wallet SIC</div>
+        <div class="sess-fields">
+          <div class="sess-field"><span class="sess-label">Date/Time</span><span class="sess-value">TBD — avoid Thursday 2:30 PM PT (Justin Condren conflict)</span></div>
+          <div class="sess-field"><span class="sess-label">Location</span><span class="sess-value">TBD — pending scheduling</span></div>
+          <div class="sess-field"><span class="sess-label">Owner</span><span class="sess-value">TD Williams — submitted SIC-147364 on Aug 25, in AMER SIC Events queue</span></div>
+          <div class="sess-field"><span class="sess-label">GEA Attendees</span><span class="sess-value">Mandar Deo · Samuel Seelam · Chuck Weaver</span></div>
+          <div class="sess-field"><span class="sess-label">SF Hosts</span><span class="sess-value">Lauren Parker (Observability) · Krista Hardebeck (Digital Wallet) · Justin Condren (Digital Wallet PM) confirmed available</span></div>
+          <div class="sess-field"><span class="sess-label">Focus</span><span class="sess-value">Agent Observability + Digital Wallet data for brand-level chargeback — tying agent session performance to credit cost per brand.</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════ SECTION: KEYNOTES -->
+  <div id="keynotes" class="section">
+    <div class="section-head">
+      <h2 class="section-title">Keynotes &amp; Sessions</h2>
+      <span class="pill">17 sessions</span>
+      <span class="section-note">Key Dreamforce sessions for your contacts to attend</span>
+    </div>
+    <div class="keynote-list">
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Main Keynote</span><span class="keynote-level">Beginner</span></div>
+        <div class="keynote-title">Dreamforce Main Keynote 2026</div>
+        <div class="keynote-desc">Join Salesforce Chair and CEO Marc Benioff, along with special guests, to explore what it means to become an Agentic Enterprise, where humans, agents, and platforms together promote customer success.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Main Keynote</span>
+          <span class="k-tag k-product">Agentforce</span>
+          <span class="k-tag k-role">Executive</span>
+          <span class="k-tag k-topic">Agentic AI</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Beginner</span></div>
+        <div class="keynote-title">Agentforce Operations Keynote</div>
+        <div class="keynote-desc">Your business is slowed by manual processes, disconnected systems, and operational bottlenecks. Learn how AI agents accelerate execution, reduce costs, and let you run with speed, accuracy, and scale.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Agentforce</span>
+          <span class="k-tag k-product">Agentforce Operations</span>
+          <span class="k-tag k-role">Operations</span>
+          <span class="k-tag k-topic">Agentic AI</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Beginner</span></div>
+        <div class="keynote-title">Agentforce Service Keynote</div>
+        <div class="keynote-desc">See how Agentforce Service unites humans and AI agents to deliver proactive service experiences across every channel.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Service</span>
+          <span class="k-tag k-role">Service</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Intermediate</span></div>
+        <div class="keynote-title">Agentforce Keynote</div>
+        <div class="keynote-desc">The best businesses don't just automate — they improve on their own. See what it looks like when your company starts learning at scale.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Agentforce</span>
+          <span class="k-tag k-role">IT Business Leader</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Beginner</span></div>
+        <div class="keynote-title">Commerce Keynote: Sell More, Operate Leaner, Grow Anywhere</div>
+        <div class="keynote-desc">One in five online dollars is already AI-influenced. Join GM Nitin Mangtani for a very important Agentforce Commerce announcement, live agent demos, and learn about the brands winning the agentic era.</div>
+        <div class="keynote-speaker">Nitin Mangtani — EVP &amp; GM, Commerce &amp; Retail Cloud, Salesforce</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Commerce</span>
+          <span class="k-tag k-role">Commerce</span>
+          <span class="k-tag k-role">Executive</span>
+          <span class="k-tag k-industry">Manufacturing</span>
+          <span class="k-tag k-industry">Retail</span>
+          <span class="k-tag k-topic">Agentic AI</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Beginner</span></div>
+        <div class="keynote-title">Informatica Keynote: AI-Readiness Starts with Trusted Data</div>
+        <div class="keynote-desc">AI agents fail because of bad data. See how Informatica's headless data management, CLAIRE agents, and governed services power the agentic enterprise — fast, trusted, and built for scale.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Informatica</span>
+          <span class="k-tag k-role">Executive</span>
+          <span class="k-tag k-role">IT Business Leader</span>
+          <span class="k-tag k-topic">Agentic AI</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span></div>
+        <div class="keynote-title">Headless 360 Keynote: Anywhere Humans and Agents Work</div>
+        <div class="keynote-desc">Unlock intelligent experiences and take Salesforce everywhere with Headless 360. See how real customers design their Agentic Enterprise with business logic and governance at the core.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Headless 360 Platform</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Beginner</span></div>
+        <div class="keynote-title">Field Service Keynote: A New Frontier for Field Operations</div>
+        <div class="keynote-desc">Field Service teams chase efficiency, but winners push AI to do more for their full operation. Learn how to turn jobs into revenue, admin headaches into distant memories, and customers into loyalists.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Field Service</span>
+          <span class="k-tag k-product">Service</span>
+          <span class="k-tag k-role">Operations</span>
+          <span class="k-tag k-role">Service</span>
+          <span class="k-tag k-topic">Agentic AI</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Beginner</span></div>
+        <div class="keynote-title">Data 360 Keynote: Agents Get Smarter. Context Gets Richer.</div>
+        <div class="keynote-desc">Discover how Data 360 instantly gives any agent, on any platform, a unified, governed view of business and customers in real time.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Data 360</span>
+          <span class="k-tag k-role">IT Business Leader</span>
+          <span class="k-tag k-topic">Data Activation</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Beginner</span></div>
+        <div class="keynote-title">Transform Quote-to-Cash with Agentforce Revenue Management</div>
+        <div class="keynote-desc">Accelerate growth with Agentforce Revenue Management — a headless quote-to-cash platform that breaks down silos, orchestrates revenue, and creates growth across every sales channel and revenue model.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Revenue Management</span>
+          <span class="k-tag k-role">Sales</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Intermediate</span></div>
+        <div class="keynote-title">The Qualified Keynote: Generate Pipeline at Scale</div>
+        <div class="keynote-desc">B2B sales and marketing leaders: discover pipeline generation in the agentic era. See the latest from Piper, the #1 AI SDR Agent, get inspired by customers, and leave with an agent to put into action.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Qualified</span>
+          <span class="k-tag k-role">Marketing</span>
+          <span class="k-tag k-role">Sales</span>
+          <span class="k-tag k-topic">Agentic AI</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span></div>
+        <div class="keynote-title">The Agentic Enterprise Runs on Trusted Context</div>
+        <div class="keynote-desc">Context turns data into action. Discover how Data 360, MuleSoft, and Informatica deliver the trusted, enterprise-wide foundation your AI agents need to act with speed and confidence.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Data 360</span>
+          <span class="k-tag k-product">MuleSoft</span>
+          <span class="k-tag k-product">Informatica</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Intermediate</span></div>
+        <div class="keynote-title">Security Keynote: Trust Across Agents, Data, and Platforms</div>
+        <div class="keynote-desc">Learn how to secure and govern your Agentic Enterprise. Outpace evolving threats and accelerate AI initiatives with ironclad trust, visibility, and guardrails.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Headless 360 Platform</span>
+          <span class="k-tag k-role">IT Business Leader</span>
+          <span class="k-tag k-topic">Security</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Intermediate</span></div>
+        <div class="keynote-title">Salesforce on Salesforce: Scaling the Agentic Enterprise</div>
+        <div class="keynote-desc">We built the Agentic Enterprise, and now we're scaling it. Joe Inzerillo and the leaders who've lived it share what broke, what we're seeing today, and the Customer Zero empowerment we're handing you.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Agentforce</span>
+          <span class="k-tag k-role">Executive</span>
+          <span class="k-tag k-topic">Salesforce on Salesforce</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Beginner</span></div>
+        <div class="keynote-title">Marketing Keynote: Evolve Every Customer Experience</div>
+        <div class="keynote-desc">Hear from product leaders and customers to see how AI agents multiply marketers to evolve every customer experience, grow customer relationships and revenue, and become an Agentic Enterprise.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Marketing</span>
+          <span class="k-tag k-role">Marketing</span>
+          <span class="k-tag k-topic">Agentic AI</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Intermediate</span></div>
+        <div class="keynote-title">Manufacturing Keynote: The Rise of the Agentic Manufacturer</div>
+        <div class="keynote-desc">Hear from two manufacturers leading the agentic revolution. See how Salesforce and Agentforce improve efficiency, reduce costs, and drive revenue, from the loading dock to the field.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Manufacturing</span>
+          <span class="k-tag k-role">Operations</span>
+          <span class="k-tag k-role">Sales</span>
+          <span class="k-tag k-industry">Manufacturing</span>
+          <span class="k-tag k-topic">Agentic AI</span>
+          <span class="k-tag k-priority">GEA Priority</span>
+        </div>
+      </div>
+
+      <div class="keynote-card">
+        <div class="keynote-head"><span class="keynote-badge">Keynote</span><span class="keynote-level">Intermediate</span></div>
+        <div class="keynote-title">Customer Success Keynote: Changing What's Possible</div>
+        <div class="keynote-desc">Learn from organizations redefining what's possible with AI. Discover proven strategies, practical lessons, and inspiring customer stories — and celebrate this year's Customer Success Award winners.</div>
+        <div class="keynote-meta-row">
+          <span class="k-tag k-format">Keynote</span>
+          <span class="k-tag k-product">Agentforce</span>
+          <span class="k-tag k-role">Administrator</span>
+          <span class="k-tag k-role">Executive</span>
+          <span class="k-tag k-industry">Financial Services</span>
+          <span class="k-tag k-industry">Technology</span>
+          <span class="k-tag k-topic">Agentic AI</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════ SECTION: PARTNER EVENTS -->
+  <div id="partner-events" class="section">
+    <div class="section-head">
+      <h2 class="section-title">Partner Events</h2>
+      <span class="pill">22 events</span>
+    </div>
+
+    <div class="partner-day">
+      <div class="day-head">
+        <span class="day-label">Pre-Day</span>
+        <span class="day-date">Sept 14<span class="day-dow"> Monday</span></span>
+        <div class="day-rule"></div>
+      </div>
+      <div class="partner-events-grid">
+        <div class="partner-card">
+          <div class="partner-name">Atrium</div>
+          <div class="partner-event-name">Welcome Reception</div>
+          <div class="partner-meta"><span>🕐 5–7 PM</span><span>📍 Golden Eye Social · 311 3rd St</span></div>
+          <a href="https://atrium.ai/events/dreamforce-2026-welcome-reception/" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Publicis Sapient + Adyen</div>
+          <div class="partner-event-name">Agentic Commerce Cocktail Social</div>
+          <div class="partner-meta"><span>🕐 5:30–7 PM</span><span>📍 The Battery, Musto Bar</span></div>
+          <a href="https://events.publicissapient.com/agentic-commerce-df" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">AllCloud</div>
+          <div class="partner-event-name">Dreamforce Kick Off</div>
+          <div class="partner-meta"><span>🕐 6–9 PM</span><span>📍 Dawn Club</span></div>
+          <a href="https://go.allcloud.io/e/713693/dreamforce-kickoff-happy-hour-/364s18/1944750487/h/m-5CbsMdmyAjUeQpowkKAdEdaK2jeXeV9e1MZonF8es" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-day">
+      <div class="day-head">
+        <span class="day-label">Day 1</span>
+        <span class="day-date">Sept 15<span class="day-dow"> Tuesday</span></span>
+        <div class="day-rule"></div>
+      </div>
+      <div class="partner-events-grid">
+        <div class="partner-card">
+          <div class="partner-name">Astound</div>
+          <div class="partner-event-name">Coffee &amp; Conversion: Retail's Path to Agentic Commerce</div>
+          <div class="partner-meta"><span>🕐 7–9 AM</span><span>📍 Marriott Marquis Suite 3230</span></div>
+          <a href="https://events.astounddigital.com/coffeeandconversion" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Astound</div>
+          <div class="partner-event-name">Women in AI Breakfast</div>
+          <div class="partner-meta"><span>🕐 7–9 AM</span><span>📍 Marriott Marquis Suite 3249</span></div>
+          <a href="https://events.astounddigital.com/df26womeninaibreakfast" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Slalom</div>
+          <div class="partner-event-name">Dreamforce Viewing Party</div>
+          <div class="partner-meta"><span>🕐 9 AM–Noon</span><span>📍 Minna Gallery</span></div>
+          <a href="https://go.slalom.com/SlalomKeynoteViewingDF26" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">AllCloud</div>
+          <div class="partner-event-name">Executive Advisory Board Lunch: Beyond the AI Pilot</div>
+          <div class="partner-meta"><span>🕐 Noon–2 PM</span><span>📍 54 Mint · 16 Mint Plaza</span></div>
+          <a href="https://allcloud.io/go/sf-dreamforce-advisory-board-lunch-2026/" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Atrium</div>
+          <div class="partner-event-name">Wabtec: Modernizing Commercial Operations for the AI Era</div>
+          <div class="partner-meta"><span>🕐 1:30–2:30 PM</span><span>📍 Golden Eye Social · 311 3rd St</span></div>
+          <a href="https://atrium.ai/events/building-the-agentic-enterprise-dreamforce-2026/" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Pierce Washington</div>
+          <div class="partner-event-name">Manufacturing Happy Hour</div>
+          <div class="partner-meta"><span>🕐 5:30–7:30 PM</span><span>📍 Novela · 620 Mission</span></div>
+          <a href="https://www2.piercewashington.com/MAE-Happy-Hour-2026" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Coastal TCS</div>
+          <div class="partner-event-name">An Evening Above Dreamforce</div>
+          <div class="partner-meta"><span>🕐 Tues, Sept 15 · 5:30–7:30 PM</span><span>📍 W Hotel, San Francisco</span></div>
+          <a href="https://events.coastal.us/happy-hour-df26" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Tech Mahindra</div>
+          <div class="partner-event-name">Cruise Dinner at Fume Blanc</div>
+          <div class="partner-meta"><span>🕐 7:00–10:00 PM</span><span>📍 Oracle Ferry Terminal · 24 Willie Mays Plaza</span></div>
+          <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=9UL07ZS5hkyhMbQrA6FslaHDOg3S7oNHgRZtiysrvE9UMlQwV0JMT1ZGR1lTOEU3V0RURU9RSkRLSi4u&route=shorturl" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Uptima</div>
+          <div class="partner-event-name">Annual After Party at the Speakeasy</div>
+          <div class="partner-meta"><span>🕐 7:30 PM</span><span>📍 Bourbon and Branch</span></div>
+          <span class="partner-reg-pending">Reg Pending</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-day">
+      <div class="day-head">
+        <span class="day-label">Day 2</span>
+        <span class="day-date">Sept 16<span class="day-dow"> Wednesday</span></span>
+        <div class="day-rule"></div>
+      </div>
+      <div class="partner-events-grid">
+        <div class="partner-card">
+          <div class="partner-name">Astound</div>
+          <div class="partner-event-name">Agentic Service Breakfast</div>
+          <div class="partner-meta"><span>🕐 7–9 AM</span><span>📍 Marriott Marquis Suite 3249</span></div>
+          <a href="https://events.astounddigital.com/agenticservicebreakfast" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Astound</div>
+          <div class="partner-event-name">B2B &amp; Manufacturing Breakfast</div>
+          <div class="partner-meta"><span>🕐 7–9 AM</span><span>📍 Marriott Marquis Suite 3230</span></div>
+          <a href="https://events.astounddigital.com/dreamforceb2bcommercebreakfast" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Coastal TCS</div>
+          <div class="partner-event-name">Lunch Panel with MAE Leaders Winning with Salesforce</div>
+          <div class="partner-meta"><span>🕐 11:30 AM–1 PM</span><span>📍 W Hotel Social Terrace</span></div>
+          <a href="https://events.coastal.us/mae-lunch-df26" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Pierce Washington</div>
+          <div class="partner-event-name">CPQ to ARM Migration Lunch</div>
+          <div class="partner-meta"><span>🕐 Noon–1:30 PM</span><span>📍 E&amp;O Kitchen &amp; Bar</span></div>
+          <a href="https://www2.piercewashington.com/CPQ-to-ARM-Migration-Luncheon-2026" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">PwC</div>
+          <div class="partner-event-name">Roundtable on Revenue Advance (RCA)</div>
+          <div class="partner-meta"><span>🕐 2–3 PM</span><span>📍 Restaurant Anzu @ Hotel Nikko</span></div>
+          <a href="https://meetpwc.cventevents.com/event/PwC-at-Dreamforce-2026/Home2" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Publicis Sapient</div>
+          <div class="partner-event-name">How Phillips 66 Fast-Tracked AI-Driven Customer Service</div>
+          <div class="partner-meta"><span>🕐 3–3:45 PM</span><span>📍 Moscone South Lobby</span></div>
+          <a href="https://events.publicissapient.com/ps-and-p66-at-dreamforce" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Publicis Sapient</div>
+          <div class="partner-event-name">Coppel Story: Commerce Was the Catalyst</div>
+          <div class="partner-meta"><span>🕐 TBD</span><span>📍 Moscone South Lobby</span></div>
+          <a href="https://events.publicissapient.com/ps-and-coppel-at-dreamforce" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Deloitte + Contentful</div>
+          <div class="partner-event-name">Commerce &amp; Marketing Reception</div>
+          <div class="partner-meta"><span>🕐 4:30–6:30 PM</span><span>📍 Movida</span></div>
+          <a href="https://deloittedigitalcommercemarketi.splashthat.com/" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Atrium</div>
+          <div class="partner-event-name">Pre-Dreamfest Happy Hour</div>
+          <div class="partner-meta"><span>🕐 5–7 PM</span><span>📍 Woodbury · 685 3rd St</span></div>
+          <a href="https://atrium.ai/events/dreamforce-2026-dreamfest-happy-hour/" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-day">
+      <div class="day-head">
+        <span class="day-label">Day 3</span>
+        <span class="day-date">Sept 17<span class="day-dow"> Thursday</span></span>
+        <div class="day-rule"></div>
+      </div>
+      <div class="partner-events-grid">
+        <div class="partner-card">
+          <div class="partner-name">Slalom</div>
+          <div class="partner-event-name">Breakfast: The Future of Rev Ops is Consumption</div>
+          <div class="partner-meta"><span>🕐 8:30–10 AM</span><span>📍 Minna Gallery</span></div>
+          <a href="https://go.slalom.com/SlalomFutureofRevenueDF26" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+        <div class="partner-card">
+          <div class="partner-name">Publicis Sapient</div>
+          <div class="partner-event-name">Is Your Marketing Foundation Ready for MC Next?</div>
+          <div class="partner-meta"><span>🕐 On-Demand Appointments</span><span>📍 Moscone South Lobby</span></div>
+          <a href="https://events.publicissapient.com/isyourmarketingfoundationready" target="_blank" class="partner-reg-link">Registration Page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="microsite-section">
+      <div class="microsite-label">Partner MicroSites — Full event lists, locations &amp; registration links</div>
+      <p style="font-size:13px;color:var(--gea-mid);margin:4px 0 12px 0;">Keep an eye on partner sites for more events popping up closer to the event</p>
+      <div class="microsite-list">
+        <a href="https://atrium.ai/dreamforce-2026/" target="_blank" class="microsite-card">
+          <span class="microsite-name">Atrium</span>
+          <span class="microsite-desc">Atrium Lounge at Golden Eye Social</span>
+        </a>
+        <a href="https://www2.piercewashington.com/Dreamforce-2026-Events" target="_blank" class="microsite-card">
+          <span class="microsite-name">Pierce Washington</span>
+          <span class="microsite-desc">MAE Events &amp; Manufacturing Happy Hour</span>
+        </a>
+        <a href="https://events.astounddigital.com" target="_blank" class="microsite-card">
+          <span class="microsite-name">Astound</span>
+          <span class="microsite-desc">Commerce &amp; Service breakfasts</span>
+        </a>
+        <a href="https://events.coastal.us" target="_blank" class="microsite-card">
+          <span class="microsite-name">Coastal TCS</span>
+          <span class="microsite-desc">MAE Lunch &amp; Evening Above</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════ SECTION: KNOW BEFORE YOU GO -->
+  <div id="know-before" class="section">
+    <div class="section-head">
+      <h2 class="section-title">Know Before You Go</h2>
+      <span class="section-note">Session types &amp; what to expect at Dreamforce 2026</span>
+    </div>
+
+    <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--gea-slate);">Session Types</h3>
+    <div class="kbyg-grid">
+      <div class="kbyg-card">
+        <h3>Listen &amp; Learn</h3>
+        <ul>
+          <li><strong>Keynotes</strong> — Large-format main stage. Marc Benioff + special guests.</li>
+          <li><strong>Breakout Sessions</strong> — 45–60 min presentations. Great for product roadmap depth.</li>
+          <li><strong>Theater Sessions</strong> — 20-min rapid-fire demos. Great for Agentforce City. First come, first seated.</li>
+        </ul>
+      </div>
+      <div class="kbyg-card">
+        <h3>Interactive</h3>
+        <ul>
+          <li><strong>Roundtables</strong> — Facilitated peer discussion (10–20 people). GEA's Warranty Roundtable is this format. Reserve ahead — limited seats.</li>
+          <li><strong>Hands-On Training</strong> — Labs with direct instruction. Good for Chuck and Sean's technical track.</li>
+          <li><strong>SICs</strong> — Your dedicated Salesforce product meetings. GEA has 3 confirmed (Field Service, Analytics, Commerce) and 1 submitted pending scheduling (Observability/Digital Wallet).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background:var(--gea-light);border:1px solid rgba(0,48,135,.12);border-radius:10px;padding:16px 22px;margin-bottom:28px;">
+      <div style="font-weight:700;font-size:14px;color:var(--gea-navy);margin-bottom:10px;">Sessions &amp; Agenda Builder</div>
+      <ul style="font-size:13.5px;color:#444;line-height:1.8;padding-left:18px;margin:0;">
+        <li>Agenda Builder is live at <a href="https://www.salesforce.com/dreamforce/my-agenda/" target="_blank">salesforce.com/dreamforce/my-agenda</a></li>
+        <li>Mobile app launches Sept 2 — download before you go</li>
+        <li>First come, first seated for keynotes and breakouts — arrive 15 min early</li>
+        <li>SICs and roundtables are reserved — check your calendar invites</li>
+      </ul>
+    </div>
+
+    <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--gea-slate);">Campus Experiences &amp; Locations</h3>
+    <div class="venue-grid">
+      <div class="venue-card">
+        <h4>Campground</h4>
+        <p>The main Dreamforce hub at Moscone Center. Agentforce demos, partner pavilions, and the heart of the conference floor.</p>
+      </div>
+      <div class="venue-card">
+        <h4>Learning Labs</h4>
+        <p>Hands-on sessions with direct instruction. Technical tracks for Sam, Chuck, and Sean's team.</p>
+      </div>
+      <div class="venue-card">
+        <h4>Trailblazer Forest</h4>
+        <p>Outdoor networking space. Community meetups and casual connections between sessions.</p>
+      </div>
+      <div class="venue-card">
+        <h4>Community Cove</h4>
+        <p>Community-driven content, user groups, and Trailblazer meetups. Great for peer networking.</p>
+      </div>
+      <div class="venue-card">
+        <h4>Dreampark</h4>
+        <p>Outdoor activations and Agentforce City. GEA's Bodewell/Sunny was featured here at DF25.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--gea-slate);">Pro Tips for Success</h3>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <h4>Arrive Early</h4>
+        <p>Sessions fill fast. For keynotes, arrive 30+ minutes early. For SICs, arrive exactly on time — they start promptly.</p>
+      </div>
+      <div class="tip-card">
+        <h4>During the Event</h4>
+        <p>Wear comfortable shoes. Moscone is spread across multiple buildings. Build in travel time between sessions — 15 min minimum.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Bookmark Sessions on Salesforce+</h4>
+        <p>Can't attend live? Most keynotes stream on Salesforce+. Save your must-see sessions in the app ahead of time.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Install the App Before You Go</h4>
+        <p>The Dreamforce mobile app has your schedule, maps, and networking. Download before Sept 15 — it launches Sept 2.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Safety &amp; Security Best Practices</h4>
+        <p>Keep badges visible. Report anything suspicious to event staff. Emergency exits are marked on all venue maps.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════ SECTION: FULL TEAM -->
+  <div id="full-team" class="section">
+
+    <div class="hero" style="background:linear-gradient(135deg,#003087 0%,#1A56DB 100%);">
+      <img src="gea-logo.png" alt="GEA" class="hero-logo-img">
+      <div class="hero-title">Full Team Agenda</div>
+      <div class="hero-subtitle">Shared events, SICs, speaking sessions &amp; meals for all GEA attendees</div>
+    </div>
+
+    <!-- MONDAY -->
+    <div class="agenda-day">
+      <div class="agenda-day-header">Monday, September 14 — Arrival</div>
+      <div class="agenda-row"><div class="agenda-time">All Day</div><div class="agenda-desc"><div class="title">Arrive San Francisco</div><div class="sub">Check in, get oriented. Dreamforce registration opens at Moscone.</div></div><span class="badge badge-gray">Travel</span></div>
+      <div class="agenda-row"><div class="agenda-time">5:30 PM</div><div class="agenda-desc"><div class="title">Salesforce Data Foundation VIP Appreciation Dinner 🍽️</div><div class="sub">STK · 1 Market Street, San Francisco · Peer-to-peer networking with Salesforce Data Foundation VIP guests. Hosted by Michelle Teel, VP Data Foundation. ⚠️ Confirm attendance to Mike Warren ASAP.</div></div><span class="badge badge-orange">Confirm ASAP</span></div>
+      <div class="agenda-row"><div class="agenda-time">Evening</div><div class="agenda-desc"><div class="title">Welcome Reception</div><div class="sub">Kickoff evening event — details on the Partner Events tab.</div></div><span class="badge badge-blue">Optional</span></div>
+    </div>
+
+    <!-- TUESDAY -->
+    <div class="agenda-day" style="box-shadow:none;border-top:1px solid #EEF1F5;">
+      <div class="agenda-day-header">Tuesday, September 15 — Day 1</div>
+      <div class="agenda-row"><div class="agenda-time">10:00 AM</div><div class="agenda-desc"><div class="title">Dreamforce Opening Keynote</div><div class="sub">Marc Benioff + special guests. Agentforce announcements — sets the context for everything else at DF. Moscone.</div></div><span class="badge badge-orange">Must Attend</span></div>
+      <div class="agenda-row"><div class="agenda-time">12:30–2:00 PM</div><div class="agenda-desc"><div class="title"><a href="https://www.amanosf.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Lunch — a Mano</a> 🍝</div><div class="sub">Salesforce hosted · <a href="https://maps.google.com/?q=450+Hayes+St+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">450 Hayes St, San Francisco</a> · Organizer: Brendan Ristenpart · Full team</div></div><span class="badge badge-green">Confirmed</span></div>
+      <div class="agenda-row"><div class="agenda-time">2:30–2:55 PM</div><div class="agenda-desc"><div class="title">Field Service SIC — Suite O78</div><div class="sub">Executive Meeting Suite, Moscone South Upper Mezzanine · Full team with Salesforce Field Service leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+      <div class="agenda-row"><div class="agenda-time">3:00–3:55 PM</div><div class="agenda-desc"><div class="title">Analytics SIC — Suite O47</div><div class="sub">Executive Meeting Suite, Moscone South Upper Mezzanine · Full team with Salesforce Analytics leadership. ⚠️ Chuck departs ~3:10 PM for speaking session.</div></div><span class="badge badge-green">Confirmed</span></div>
+      <div class="agenda-row"><div class="agenda-time">7:00–10:00 PM</div><div class="agenda-desc"><div class="title">Tech Mahindra Cruise Dinner at Fume Blanc 🛥️</div><div class="sub">Oracle Ferry Terminal · 24 Willie Mays Plaza, San Francisco · Cruise Customer Appreciation Dinner. <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=9UL07ZS5hkyhMbQrA6FslaHDOg3S7oNHgRZtiysrvE9UMlQwV0JMT1ZGR1lTOEU3V0RURU9RSkRLSi4u&route=shorturl" target="_blank" style="color:var(--gea-blue);font-weight:600;">Registration required →</a></div></div><span class="badge badge-blue">Recommended</span></div>
+    </div>
+
+    <!-- WEDNESDAY -->
+    <div class="agenda-day" style="box-shadow:none;border-top:1px solid #EEF1F5;">
+      <div class="agenda-day-header">Wednesday, September 16 — Day 2</div>
+      <div class="agenda-row"><div class="agenda-time">Morning</div><div class="agenda-desc"><div class="title">Manufacturing &amp; Consumer Goods Keynote</div><div class="sub">GEA peer stories and industry trends. High priority for the full team.</div></div><span class="badge badge-orange">High Priority</span></div>
+      <div class="agenda-row"><div class="agenda-time">12:00–1:00 PM</div><div class="agenda-desc"><div class="title">GEA Speaking: Stop Revenue Leakage with AI-Powered Warranties 🎤</div><div class="sub">Eric Johnson speaking · Manufacturing Roundtable · InterContinental Hotel, L5, Ballroom C, Table 10 · Arrive by 11:40 AM. Full team encouraged to attend and support.</div></div><span class="badge badge-green">Confirmed</span></div>
+      <div class="agenda-row"><div class="agenda-time">3:30–4:10 PM</div><div class="agenda-desc"><div class="title">GEA Speaking: Transform Manufacturing Service with Proactive AI 🎤</div><div class="sub">Chuck Weaver speaking · Moscone South, LL, Content Pavilion, Stage 2 · Arrive by 3:10 PM. Full team encouraged to attend and support.</div></div><span class="badge badge-green">Confirmed</span></div>
+      <div class="agenda-row"><div class="agenda-time">4:00–4:55 PM</div><div class="agenda-desc"><div class="title">B2B &amp; B2C Commerce SIC — Suite O87</div><div class="sub">Executive Meeting Suite, Moscone South Upper Mezzanine · Full team with Salesforce Commerce leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+      <div class="agenda-row"><div class="agenda-time">5:00–8:00 PM</div><div class="agenda-desc"><div class="title">Pre-Dreamfest Reception @ ATWater Tavern</div><div class="sub">On the water, short walk from Oracle Park · Food, drinks &amp; Salesforce leadership networking before Dreamfest.</div></div><span class="badge badge-blue">Recommended</span></div>
+      <div class="agenda-row"><div class="agenda-time">6:00–8:00 PM</div><div class="agenda-desc"><div class="title"><a href="https://www.amber-india.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Dinner — Amber India</a> 🍛</div><div class="sub">Salesforce hosted · <a href="https://maps.google.com/?q=25+Yerba+Buena+Lane+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">25 Yerba Buena Lane, San Francisco</a> · (415) 777-0500 · Organizer: Brendan Ristenpart · Full team</div></div><span class="badge badge-green">Confirmed</span></div>
+      <div class="agenda-row"><div class="agenda-time">6:00–9:30 PM</div><div class="agenda-desc"><div class="title">Dreamfest Concert 🎶</div><div class="sub">Oracle Park · Doors 6:00 PM · Featuring Usher + Gwen Stefani · Benefits UCSF Benioff Children's Hospitals. Full team — do not miss this.</div></div><span class="badge badge-gray">Social</span></div>
+    </div>
+
+    <!-- THURSDAY -->
+    <div class="agenda-day" style="box-shadow:none;border-top:1px solid #EEF1F5;border-radius:0 0 10px 10px;">
+      <div class="agenda-day-header" style="border-radius:0;">Thursday, September 17 — Departure</div>
+      <div class="agenda-row"><div class="agenda-time">TBD</div><div class="agenda-desc"><div class="title">Depart San Francisco</div><div class="sub">Coordinate departures. Note: Mandar departs early at 6:00 AM — schedule any Thursday meetings with this in mind.</div></div><span class="badge badge-gray">Travel</span></div>
+    </div>
+
+    <!-- SHARED NOTES -->
+    <div class="card" style="border-left:4px solid var(--gea-blue);margin-top:20px;">
+      <div class="card-title"><div class="icon">📌</div>Shared Notes &amp; Conflicts to Watch</div>
+      <div style="display:grid;gap:10px;">
+        <div style="background:#FEF6E7;border:1px solid rgba(245,166,35,.3);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--gea-slate);line-height:1.6;"><strong>⚠️ Chuck — Analytics SIC vs. Speaking Session (Tues)</strong><br>Analytics SIC runs 3:00–3:55 PM. Chuck's Wednesday speaking session is separate — but confirm Chuck's availability throughout Tuesday's SIC.</div>
+        <div style="background:#FEF6E7;border:1px solid rgba(245,166,35,.3);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--gea-slate);line-height:1.6;"><strong>⚠️ B2B &amp; B2C Commerce SIC vs. Pre-Dreamfest Reception (Wed)</strong><br>SIC ends 4:55 PM, ATWater reception starts 5:00 PM. Head over immediately after the SIC ends — only a 5-min gap.</div>
+        <div style="background:#FEF6E7;border:1px solid rgba(245,166,35,.3);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--gea-slate);line-height:1.6;"><strong>⚠️ Observability/Digital Wallet SIC — TBD</strong><br>Pending scheduling confirmation. Proposed attendees: Mandar Deo · Samuel Seelam · Chuck Weaver. Time slot TBD — will be added once confirmed.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════ SECTION: JASON (customer-facing) -->
+  <div id="jason" class="section">
+
+    <div class="hero">
+      <h2>Dreamforce 2026 — Jason West</h2>
+      <p>September 15–17 · Moscone Center, San Francisco. Planning meeting August 6 — Commerce + Field Service SICs submitted based on Mandar/Sam call.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="label">Planning Meeting</div><div class="value">August 6, 2026</div></div>
+        <div class="hero-meta-item"><div class="label">Dreamforce</div><div class="value">Sept 15–17, 2026</div></div>
+        <div class="hero-meta-item"><div class="label">Registration</div><div class="value">✅ Confirmed</div></div>
+      </div>
+    </div>
+
+    <!-- JASON: CUSTOMER CONNECTIONS -->
+    <div class="card" style="border-left:4px solid var(--gea-blue);">
+      <div class="card-title"><div class="icon">🤝</div>Customer Connections</div>
+      <p style="font-size:13.5px;color:var(--gea-slate);margin-bottom:18px;line-height:1.6;">Jason has expressed interest in connecting with a peer who has been a successful change agent at a manufacturer. Mike is working with Salesforce account teams to identify and align the right connection — we'll update as this comes together.</p>
+      <div style="display:grid;gap:12px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#F8F9FC;border:1px solid rgba(0,48,135,.1);border-radius:8px;padding:14px 16px;">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);margin-bottom:3px;">Manufacturer Change Agent — Peer Conversation</div>
+            <div style="font-size:13px;color:var(--gea-mid);line-height:1.6;">Strategic peer connection with a manufacturing leader who has driven significant digital and operational transformation. Mike is identifying the right match.</div>
+          </div>
+          <span class="badge badge-blue" style="flex-shrink:0;">In Outreach</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="icon">📅</div>Recommended Agenda for Jason</div>
+      <div class="agenda-day" style="margin-bottom:0;box-shadow:none;">
+        <div class="agenda-day-header" style="border-radius:8px 8px 0 0;">Monday, September 14 — Arrival Day</div>
+        <div class="agenda-row"><div class="agenda-time">Afternoon</div><div class="agenda-desc"><div class="title">Arrive San Francisco</div><div class="sub">Check in ahead of Dreamforce. Badge pickup at Moscone West.</div></div><span class="badge badge-gray">Travel</span></div>
+        <div class="agenda-row"><div class="agenda-time">5:30 PM</div><div class="agenda-desc"><div class="title">Salesforce Data Foundation VIP Appreciation Dinner 🍽️</div><div class="sub">STK · 1 Market Street, San Francisco · Peer-to-peer networking with Salesforce Data Foundation VIP guests. Hosted by Michelle Teel, VP Data Foundation. ⚠️ Confirm attendance to Mike Warren ASAP.</div></div><span class="badge badge-orange">Confirm ASAP</span></div>
+      </div>
+      <div class="agenda-day" style="margin-bottom:0;box-shadow:none;border-top:1px solid #EEF1F5;">
+        <div class="agenda-day-header">Tuesday, September 15</div>
+        <div class="agenda-row"><div class="agenda-time">10:00 AM</div><div class="agenda-desc"><div class="title">Opening Keynote — Marc Benioff</div><div class="sub">Main stage. Major Agentforce announcements and customer stories. The context for everything else at DF.</div></div><span class="badge badge-orange">Must Attend</span></div>
+        <div class="agenda-row"><div class="agenda-time">12:30–2:00 PM</div><div class="agenda-desc"><div class="title"><a href="https://www.amanosf.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Lunch — a Mano</a> 🍝</div><div class="sub"><a href="https://maps.google.com/?q=450+Hayes+St+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">450 Hayes St, San Francisco</a> · (415) 506-7401 · Organizer: Brendan Ristenpart</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">Afternoon</div><div class="agenda-desc"><div class="title">B2B Commerce + Agentforce for Commerce Sessions</div><div class="sub">Product roadmap, hands-on demos — directly relevant to your Bodewell/Profile work. Mike to curate shortlist.</div></div><span class="badge badge-blue">Recommended</span></div>
+        <div class="agenda-row"><div class="agenda-time">2:30–2:55 PM</div><div class="agenda-desc"><div class="title">Field Service SIC — Suite O78</div><div class="sub">Mandar, Eric, Sam, Chuck, Sean, Jason with Salesforce Field Service leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">3:00–3:55 PM</div><div class="agenda-desc"><div class="title">GEA Analytics SIC — Suite O47</div><div class="sub">Mandar, Jason, Sam, Chuck with Salesforce Analytics product leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">Evening</div><div class="agenda-desc"><div class="title">Welcome Reception</div><div class="sub">Networking with peer commerce and digital leaders.</div></div><span class="badge badge-gray">Networking</span></div>
+      </div>
+      <div class="agenda-day" style="margin-bottom:0;box-shadow:none;border-top:1px solid #EEF1F5;">
+        <div class="agenda-day-header">Wednesday, September 16</div>
+        <div class="agenda-row"><div class="agenda-time">Morning</div><div class="agenda-desc"><div class="title">Manufacturing + Consumer Goods Industry Keynote</div><div class="sub">GEA peer stories on the agentic enterprise. High priority for the full team.</div></div><span class="badge badge-orange">High Priority</span></div>
+        <div class="agenda-row"><div class="agenda-time">Wed 4:00–4:55 PM</div><div class="agenda-desc"><div class="title">B2B &amp; B2C Commerce SIC — Suite O87</div><div class="sub">Mandar, Eric, Chuck, Sean, Sam, Jason with Salesforce Commerce leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">6:00–8:00 PM</div><div class="agenda-desc"><div class="title"><a href="https://www.amber-india.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Dinner — Amber India</a> 🍛</div><div class="sub"><a href="https://maps.google.com/?q=25+Yerba+Buena+Lane+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">25 Yerba Buena Lane, San Francisco</a> · (415) 777-0500 · Organizer: Brendan Ristenpart</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">6:00–9:30 PM</div><div class="agenda-desc"><div class="title">Dreamfest Concert 🎶</div><div class="sub">Oracle Park · Doors 6:00 PM · Featuring Usher + Gwen Stefani · Benefits UCSF Benioff Children's Hospitals.</div></div><span class="badge badge-gray">Social</span></div>
+      </div>
+      <div class="agenda-day" style="margin-bottom:0;box-shadow:none;border-top:1px solid #EEF1F5;border-radius:0 0 10px 10px;">
+        <div class="agenda-day-header" style="border-radius:0;">Thursday, September 17</div>
+        <div class="agenda-row"><div class="agenda-time">Morning</div><div class="agenda-desc"><div class="title">True to the Core Q&amp;A + Commerce Product Roundtables</div><div class="sub">Direct dialogue with Salesforce Commerce product leadership on roadmap direction.</div></div><span class="badge badge-blue">Recommended</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════ SECTION: MANDAR DEO -->
+  <div id="mandar" class="section">
+
+    <div class="hero">
+      <h2>Dreamforce 2026 — Mandar Deo</h2>
+      <p>September 14–17 · San Francisco. Your agenda is set — confirmed meetings, recommended sessions, and two items below that need your input.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="label">Dreamforce</div><div class="value">Sept 15–17, 2026</div></div>
+        <div class="hero-meta-item"><div class="label">Arrives</div><div class="value">Sept 14 ~2:30 PM</div></div>
+        <div class="hero-meta-item"><div class="label">Departs</div><div class="value">Sept 17 ~6 AM</div></div>
+        <div class="hero-meta-item"><div class="label">Registration</div><div class="value">✅ Confirmed</div></div>
+        <div class="hero-meta-item"><div class="label">Executive Summit</div><div class="value">✅ Approved</div></div>
+      </div>
+    </div>
+
+    <!-- INPUT NEEDED -->
+    <div class="card" style="border-left:4px solid var(--amber);">
+      <div class="card-title"><div class="icon">📋</div>Input Needed from Mandar</div>
+      <p style="font-size:13.5px;color:var(--gea-slate);margin-bottom:20px;line-height:1.6;">Salesforce would like to propose the following smaller group meetings and will formalize with your approval.</p>
+
+      <div style="border:1px solid rgba(245,166,35,.35);border-radius:10px;padding:18px;background:rgba(254,246,231,.4);margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="font-size:22px;">🔭</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);">Agent Observability + Digital Wallet SIC</div>
+            <div style="font-size:12px;color:var(--amber);font-weight:600;text-transform:uppercase;letter-spacing:.4px;">◌ Pending Confirmation</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:14px;">A dedicated Salesforce product session combining Agent Observability and Digital Wallet — designed to tie agent session performance to credit cost per brand. GEA attendees: Mandar Deo · Samuel Seelam · Chuck Weaver.</div>
+        <table style="font-size:12.5px;width:100%;">
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);white-space:nowrap;border:none;width:110px;">SF Hosts</td><td style="padding:5px 0;border:none;color:#444;">Lauren Parker (Observability) · Krista Hardebeck (Digital Wallet) · Justin Condren (Digital Wallet PM)</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">GEA Attendees</td><td style="padding:5px 0;border:none;color:#444;">Mandar Deo · Samuel Seelam · Chuck Weaver</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">Date/Time</td><td style="padding:5px 0;border:none;color:var(--amber);font-weight:700;">TBD — pending scheduling</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">Next Step</td><td style="padding:5px 0;border:none;color:#444;">Your confirmation → Mike locks the session</td></tr>
+        </table>
+      </div>
+
+      <div style="border:1px solid rgba(245,166,35,.35);border-radius:10px;padding:18px;background:rgba(254,246,231,.4);margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="font-size:22px;">🔗</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);">MuleSoft + Agent Fabric Strategy Session</div>
+            <div style="font-size:12px;color:var(--amber);font-weight:600;text-transform:uppercase;letter-spacing:.4px;">◌ Pending Your Confirmation</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:14px;">Tony Knight (Salesforce) has requested a focused 30-min or 1-hour session on MuleSoft + Agent Fabric roadmap and GEA's architecture strategy over the next 2–3 years. This is a pure roadmap and architecture alignment conversation — no sales pitch.</div>
+        <table style="font-size:12.5px;width:100%;">
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);white-space:nowrap;border:none;width:110px;">Requested by</td><td style="padding:5px 0;border:none;color:#444;">Tony Knight, Salesforce</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">SF Host</td><td style="padding:5px 0;border:none;color:#444;">Darrin Solomon, Distinguished Client Architect</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">GEA Attendees</td><td style="padding:5px 0;border:none;color:#444;">Mandar Deo</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">Format</td><td style="padding:5px 0;border:none;color:#444;">30 min or 1 hour · MuleSoft + Agent Fabric roadmap · architecture alignment</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">Date/Time</td><td style="padding:5px 0;border:none;color:var(--amber);font-weight:700;">TBD — Mike to send available slots once confirmed</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">Next Step</td><td style="padding:5px 0;border:none;color:#444;">Your thumbs up → Mike sends Tony available time slots</td></tr>
+        </table>
+      </div>
+
+      <div style="border:1px solid rgba(245,166,35,.35);border-radius:10px;padding:18px;background:rgba(254,246,231,.4);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="font-size:22px;">🛠️</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);">ITSM Roadmap &amp; Architecture Strategy Session</div>
+            <div style="font-size:12px;color:var(--amber);font-weight:600;text-transform:uppercase;letter-spacing:.4px;">◌ Pending Your Confirmation</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:#444;line-height:1.7;margin-bottom:14px;">Highly technical session on ITSM roadmap and GEA's architecture strategy over the next 2–3 years. This is a pure roadmap and architecture alignment conversation — no sales pitch. Product and Engineering Leadership only.</div>
+        <table style="font-size:12.5px;width:100%;">
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);white-space:nowrap;border:none;width:110px;">Recommended</td><td style="padding:5px 0;border:none;color:#444;">RJ Jainendra — Technical Executive Leadership, Salesforce. Prior technical leadership role at ServiceNow makes him uniquely positioned for this conversation.</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">GEA Attendees</td><td style="padding:5px 0;border:none;color:#444;">Mandar Deo</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">Format</td><td style="padding:5px 0;border:none;color:#444;">ITSM roadmap · architecture alignment · Product &amp; Engineering Leadership only</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">Date/Time</td><td style="padding:5px 0;border:none;color:var(--amber);font-weight:700;">TBD — pending Mandar's confirmation</td></tr>
+          <tr><td style="padding:5px 12px 5px 0;font-weight:700;color:var(--gea-slate);border:none;">Next Step</td><td style="padding:5px 0;border:none;color:#444;">Your thumbs up → Mike coordinates with RJ's team to schedule</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- CUSTOMER MEETINGS -->
+    <div class="card" style="border-left:4px solid var(--gea-blue);">
+      <div class="card-title"><div class="icon">🤝</div>Customer Meetings</div>
+      <p style="font-size:13.5px;color:var(--gea-slate);margin-bottom:18px;line-height:1.6;">Mike is working with each company's account team to explore peer conversations during Dreamforce week. We'll update as these come together.</p>
+      <div style="display:grid;gap:12px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#F8F9FC;border:1px solid rgba(0,48,135,.1);border-radius:8px;padding:14px 16px;">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);margin-bottom:3px;">SharkNinja</div>
+            <div style="font-size:13px;color:var(--gea-mid);line-height:1.6;">Agentforce + Commerce peer — cross-industry manufacturing connection.</div>
+          </div>
+          <span class="badge badge-blue" style="flex-shrink:0;">In Outreach</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#F8F9FC;border:1px solid rgba(0,48,135,.1);border-radius:8px;padding:14px 16px;">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);margin-bottom:3px;">Williams Sonoma</div>
+            <div style="font-size:13px;color:var(--gea-mid);line-height:1.6;">Commerce + Agentforce peer — strong strategic parallel to GEA's B2B Commerce and retail work.</div>
+          </div>
+          <span class="badge badge-blue" style="flex-shrink:0;">In Outreach</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#F8F9FC;border:1px solid rgba(0,48,135,.1);border-radius:8px;padding:14px 16px;">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);margin-bottom:3px;">Sysco — <a href="https://www.linkedin.com/in/navadvani/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Navin Advani</a>, CIO</div>
+            <div style="font-size:13px;color:var(--gea-mid);line-height:1.6;">Executive peer conversation · Wednesday 2:05 PM · 📍 Location to be updated by Mike</div>
+          </div>
+          <span class="badge badge-green" style="flex-shrink:0;">Confirmed</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#FEF6E7;border:1px solid rgba(245,166,35,.3);border-radius:8px;padding:14px 16px;">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);margin-bottom:3px;">Mitsubishi Power — Larry Orrel, CIO &amp; Baha Tevak, CTO</div>
+            <div style="font-size:13px;color:var(--gea-mid);line-height:1.6;">Larry and Baha have specifically requested to meet Mandar. Mitsubishi Power is on the cusp of a major transformation program (Service + FSL, with MuleSoft supporting the integration layer). They're looking for a candid, informal coffee or networking conversation. <strong>Once Mandar gives the thumbs up, Mike will coordinate logistics.</strong></div>
+          </div>
+          <span class="badge badge-orange" style="flex-shrink:0;">Awaiting Mandar's OK</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANDAR'S AGENDA -->
+    <div>
+      <div style="font-weight:700;font-size:14px;color:var(--gea-navy);margin-bottom:10px;padding-left:4px;">📅 Recommended Agenda — Mandar Deo</div>
+        <div class="agenda-day" style="box-shadow:none;margin-bottom:0;">
+          <div class="agenda-day-header" style="border-radius:8px 8px 0 0;">Monday, September 14 — Arrival Day</div>
+          <div class="agenda-row"><div class="agenda-time">2:30 PM</div><div class="agenda-desc"><div class="title">Arrive San Francisco</div><div class="sub">Check in, settle.</div></div><span class="badge badge-gray">Travel</span></div>
+          <div class="agenda-row"><div class="agenda-time">5:30 PM</div><div class="agenda-desc"><div class="title">Salesforce Data Foundation VIP Appreciation Dinner 🍽️</div><div class="sub">STK · 1 Market Street, San Francisco · Peer-to-peer networking with Salesforce Data Foundation VIP guests. Hosted by Michelle Teel, VP Data Foundation. ⚠️ Confirm attendance to Mike Warren ASAP.</div></div><span class="badge badge-orange">Confirm ASAP</span></div>
+        </div>
+        <div class="agenda-day" style="box-shadow:none;margin-bottom:0;border-top:1px solid #EEF1F5;">
+          <div class="agenda-day-header">Tuesday, September 15 — Executive Summit Opens</div>
+          <div class="agenda-row"><div class="agenda-time">8:30–9:30 AM</div><div class="agenda-desc"><div class="title">Breakfast &amp; Networking — Executive Summit</div><div class="sub">1,600+ curated executives at Moscone South before the keynote. Key connection opportunity with peer manufacturing CxOs.</div></div><span class="badge badge-blue">Exec Summit</span></div>
+          <div class="agenda-row"><div class="agenda-time">10:00 AM</div><div class="agenda-desc"><div class="title">Opening Keynote — VIP Reserved Seating</div><div class="sub">Marc Benioff's opening + Agentforce announcements. Context for everything else at DF.</div></div><span class="badge badge-orange">Must Attend</span></div>
+          <div class="agenda-row"><div class="agenda-time">12:30–2:00 PM</div><div class="agenda-desc"><div class="title"><a href="https://www.amanosf.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Lunch — a Mano</a> 🍝</div><div class="sub"><a href="https://maps.google.com/?q=450+Hayes+St+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">450 Hayes St, San Francisco</a> · (415) 506-7401 · Organizer: Brendan Ristenpart</div></div><span class="badge badge-green">Confirmed</span></div>
+          <div class="agenda-row"><div class="agenda-time">Afternoon</div><div class="agenda-desc"><div class="title">Executive Sessions + Closed Roundtables</div><div class="sub">Agentic Enterprise Strategy, AI Data Foundation, Adoption + Value, Leading Humans + Agents. Select 2–3 most relevant — no need to fill every slot.</div></div><span class="badge badge-green">High Relevance</span></div>
+          <div class="agenda-row"><div class="agenda-time">2:30–2:55 PM</div><div class="agenda-desc"><div class="title">Field Service SIC — Suite O78</div><div class="sub">Mandar, Eric, Sam, Chuck, Sean, Jason with Salesforce Field Service leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+          <div class="agenda-row"><div class="agenda-time">3:00–3:55 PM</div><div class="agenda-desc"><div class="title">GEA Analytics SIC — Suite O47</div><div class="sub">Mandar, Jason, Sam, Chuck with Salesforce Analytics product leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+          <div class="agenda-row"><div class="agenda-time">3:55–4:20 PM</div><div class="agenda-desc"><div class="title">Mark Recher × Mandar 1-on-1</div><div class="sub">Mark Recher is Salesforce EVP/GM, Slack. 25 min directly following Analytics SIC. Strategic alignment on Slack pilot and GEA's Teams-to-Slack migration path.</div></div><span class="badge badge-green">Confirmed</span></div>
+        </div>
+        <div class="agenda-day" style="box-shadow:none;margin-bottom:0;border-top:1px solid #EEF1F5;">
+          <div class="agenda-day-header">Wednesday, September 16</div>
+          <div class="agenda-row"><div class="agenda-time">8:00–9:30 AM</div><div class="agenda-desc"><div class="title">Breakfast &amp; Networking — Executive Summit</div><div class="sub">Executive Summit Lounge · Informal morning networking with peer executives before the day's programming begins.</div></div><span class="badge badge-blue">Exec Summit</span></div>
+          <div class="agenda-row"><div class="agenda-time">Morning</div><div class="agenda-desc"><div class="title">Manufacturing &amp; Consumer Goods Keynote</div><div class="sub">GEA peer stories and industry trends. High priority for context and potential speaking follow-up.</div></div><span class="badge badge-orange">High Priority</span></div>
+          <div class="agenda-row"><div class="agenda-time">12:00–1:00 PM</div><div class="agenda-desc"><div class="title">Lunch — TCS</div><div class="sub">On Mandar's Outlook calendar — details to be confirmed directly with Mandar.</div></div><span class="badge badge-green">Confirmed</span></div>
+          <div class="agenda-row"><div class="agenda-time">2:05 PM</div><div class="agenda-desc"><div class="title">Peer 1:1 — <a href="https://www.linkedin.com/in/navadvani/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Navin Advani</a>, CIO, Sysco</div><div class="sub">Executive peer conversation. Manufacturing + enterprise technology peer. 📍 Location to be updated by Mike.</div></div><span class="badge badge-green">Confirmed</span></div>
+          <div class="agenda-row"><div class="agenda-time">4:00–4:55 PM</div><div class="agenda-desc"><div class="title">B2B &amp; B2C Commerce SIC — Suite O87</div><div class="sub">Mandar, Eric, Chuck, Sean, Sam, Jason with Salesforce Commerce leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+          <div class="agenda-row"><div class="agenda-time">6:00–8:00 PM</div><div class="agenda-desc"><div class="title">Dinner — Tech Mahindra</div><div class="sub">On Mandar's Outlook calendar — details to be confirmed directly with Mandar. ⚠️ Note: conflicts with Salesforce-hosted Amber India team dinner (same time).</div></div><span class="badge badge-green">Confirmed</span></div>
+          <div class="agenda-row"><div class="agenda-time">6:00–8:00 PM</div><div class="agenda-desc"><div class="title"><a href="https://www.amber-india.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Dinner — Amber India</a> 🍛</div><div class="sub"><a href="https://maps.google.com/?q=25+Yerba+Buena+Lane+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">25 Yerba Buena Lane, San Francisco</a> · (415) 777-0500 · Organizer: Brendan Ristenpart</div></div><span class="badge badge-green">Confirmed</span></div>        </div>
+        <div class="agenda-day" style="box-shadow:none;border-top:1px solid #EEF1F5;border-radius:0 0 10px 10px;">
+          <div class="agenda-day-header" style="border-radius:0;">Thursday, September 17 — Departs Early</div>
+          <div class="agenda-row"><div class="agenda-time">6:00 AM</div><div class="agenda-desc"><div class="title">Departs San Francisco</div><div class="sub">Early morning flight. Schedule product meetings on Sept 15–16 if possible given early departure.</div></div><span class="badge badge-gray">Travel</span></div>
+        </div>
+    </div>
+
+    <!-- MANDAR EXCLUSIVE: Executive Summit -->
+    <div class="card" style="border-left:4px solid var(--gea-navy);">
+      <div class="card-title"><div class="icon">⭐</div>Dreamforce Executive Summit</div>
+      <p style="font-size:13.5px;line-height:1.7;color:#444;margin-bottom:14px;">Mandar is approved for the <strong>Dreamforce Executive Summit</strong> — a curated, invitation-only experience brought to you by PwC, running all three days at Moscone South. Designed for meaningful connection, actionable insight, and leadership in the age of AI.</p>
+      <div class="grid-2" style="margin-bottom:16px;">
+        <div style="background:#F8F9FC;border-radius:8px;padding:14px;">
+          <div style="font-weight:700;font-size:12px;color:var(--gea-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">What's Included</div>
+          <ul style="font-size:13px;line-height:1.9;color:#444;padding-left:16px;">
+            <li><strong>Complimentary Dreamforce pass</strong> (valued at $2,299+)</li>
+            <li>Daily <strong>Breakfast &amp; Networking</strong> — 8:30–9:30 AM each day</li>
+            <li><strong>Reserved keynote seating</strong> — Opening Keynote, Sept 15</li>
+            <li><strong>Executive Sessions</strong> — fireside chats, panels, roundtables</li>
+            <li>Networking lunches and evening reception (Sept 15)</li>
+            <li>Private <strong>executive lounge</strong> + dedicated concierge</li>
+            <li><strong>Dreamfest VIP</strong> concert access</li>
+            <li>Comedy Hour (Sept 17, 3:00–4:00 PM)</li>
+          </ul>
+        </div>
+        <div style="background:#F8F9FC;border-radius:8px;padding:14px;">
+          <div style="font-weight:700;font-size:12px;color:var(--gea-navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Session Themes</div>
+          <ul style="font-size:13px;line-height:1.9;color:#444;padding-left:16px;">
+            <li>Adoption + Value</li>
+            <li>AI Data Foundation</li>
+            <li>Agentic Enterprise Strategy</li>
+            <li>AI Roadmap + Orchestration</li>
+            <li>Leading Humans + Agents</li>
+          </ul>
+          <div style="font-size:12px;color:var(--gea-mid);margin-top:10px;">1,600+ curated executives · Moscone South · Sept 15–17</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="exec-summit-guide.pdf" download class="btn btn-outline" style="font-size:12px;">📄 Download Exec Summit Guide</a>
+      </div>
+      <div style="margin-top:18px;">
+        <div style="font-size:11px;font-weight:700;color:var(--gea-mid);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Daily Schedule Overview</div>
+        <img src="exec-summit-schedule.jpg" alt="Executive Summit Daily Schedule" style="width:100%;border-radius:8px;border:1px solid rgba(0,48,135,.10);box-shadow:0 2px 12px rgba(0,48,135,.10);">
+      </div>
+    </div>
+
+    <!-- CONFIRMATIONS -->
+  </div><!-- /mandar section -->
+
+  <!-- ══════════════════════ SECTION: SAM SEELAM -->
+  <div id="sam" class="section">
+
+    <div class="hero">
+      <h2>Dreamforce 2026 — Sam Seelam</h2>
+      <p>September 14–17 · San Francisco. Your agenda is set — confirmed meetings, recommended sessions, and peer connections below.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="label">Dreamforce</div><div class="value">Sept 15–17, 2026</div></div>
+        <div class="hero-meta-item"><div class="label">Arrives</div><div class="value">Sept 14 ~4:00 PM</div></div>
+        <div class="hero-meta-item"><div class="label">Departs</div><div class="value">Sept 17 ~7 AM</div></div>
+        <div class="hero-meta-item"><div class="label">Registration</div><div class="value">✅ Confirmed</div></div>
+      </div>
+    </div>
+
+    <!-- CUSTOMER CONNECTIONS -->
+    <div class="card" style="border-left:4px solid var(--gea-blue);">
+      <div class="card-title"><div class="icon">🤝</div>Customer Connections</div>
+      <p style="font-size:13.5px;color:var(--gea-slate);margin-bottom:18px;line-height:1.6;">Mike is working with each company's account team to explore peer conversations during Dreamforce week. We'll update as these come together.</p>
+      <div style="display:grid;gap:12px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#F8F9FC;border:1px solid rgba(0,48,135,.1);border-radius:8px;padding:14px 16px;">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);margin-bottom:3px;">SharkNinja</div>
+            <div style="font-size:13px;color:var(--gea-mid);line-height:1.6;">Agentforce + Field Service peer — cross-industry manufacturing connection.</div>
+          </div>
+          <span class="badge badge-blue" style="flex-shrink:0;">In Outreach</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#F8F9FC;border:1px solid rgba(0,48,135,.1);border-radius:8px;padding:14px 16px;">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);margin-bottom:3px;">Williams Sonoma</div>
+            <div style="font-size:13px;color:var(--gea-mid);line-height:1.6;">Commerce + Agentforce peer — strong strategic parallel to GEA's B2B Commerce and service work.</div>
+          </div>
+          <span class="badge badge-blue" style="flex-shrink:0;">In Outreach</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CUSTOMER SUCCESS LEADERSHIP CONNECTIONS -->
+    <div class="card" style="border-left:4px solid var(--gea-blue);">
+      <div class="card-title"><div class="icon">⭐</div>Customer Success Leadership Connections</div>
+      <div style="display:grid;gap:12px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#F8F9FC;border:1px solid rgba(0,48,135,.1);border-radius:8px;padding:14px 16px;">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gea-slate);margin-bottom:3px;">Kathleen Blackwelder × Sam Seelam — 1:1</div>
+            <div style="font-size:12px;color:var(--gea-mid);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">VP, Customer Success · Salesforce</div>
+            <div style="font-size:13px;color:#444;line-height:1.7;">Dreamforce is the right moment for Sam and Kathleen to move beyond the cadence of virtual check-ins and have a candid, forward-looking conversation about GEA's priorities — strengthening the relationship between GEA and Signature Success at the executive level. Date TBD — pending scheduling and Sam's approval.</div>
+          </div>
+          <span class="badge badge-orange" style="flex-shrink:0;">Pending Confirmation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAM'S RECOMMENDED AGENDA -->
+    <div>
+      <div style="font-weight:700;font-size:14px;color:var(--gea-navy);margin-bottom:10px;padding-left:4px;">📅 Recommended Agenda — Sam Seelam</div>
+      <div class="agenda-day" style="box-shadow:none;margin-bottom:0;">
+        <div class="agenda-day-header" style="border-radius:8px 8px 0 0;">Monday, September 14 — Arrival Day</div>
+        <div class="agenda-row"><div class="agenda-time">~4:00 PM</div><div class="agenda-desc"><div class="title">Arrive San Francisco</div><div class="sub">Check in, settle in ahead of Dreamforce.</div></div><span class="badge badge-gray">Travel</span></div>
+        <div class="agenda-row"><div class="agenda-time">5:30 PM</div><div class="agenda-desc"><div class="title">Salesforce Data Foundation VIP Appreciation Dinner 🍽️</div><div class="sub">STK · 1 Market Street, San Francisco · Peer-to-peer networking with Salesforce Data Foundation VIP guests. Hosted by Michelle Teel, VP Data Foundation. ⚠️ Confirm attendance to Mike Warren ASAP.</div></div><span class="badge badge-orange">Confirm ASAP</span></div>
+        <div class="agenda-row"><div class="agenda-time">6:00–9:00 PM</div><div class="agenda-desc"><div class="title">Slack CxO Dinner 🍽️</div><div class="sub">Lazy Bear · Two-Michelin-star restaurant · VP+ and top account CxO leaders. Intimate dinner with candid conversations on the future of work and AI with Slack leadership. Hosts: Rob Seaman, Jaime DeLanghe, Revathi Venkatraman, Amy Bauer, Adam Samet, Zach Ciliotta-Young, Ryan Gavin.</div></div><span class="badge badge-green">Confirmed</span></div>
+      </div>
+      <div class="agenda-day" style="box-shadow:none;margin-bottom:0;border-top:1px solid #EEF1F5;">
+        <div class="agenda-day-header">Tuesday, September 15 — Opening Day</div>
+        <div class="agenda-row"><div class="agenda-time">10:00 AM</div><div class="agenda-desc"><div class="title">Opening Keynote — Marc Benioff</div><div class="sub">Major Agentforce announcements. Watch for field service and B2B Commerce callouts.</div></div><span class="badge badge-orange">Must Attend</span></div>
+        <div class="agenda-row"><div class="agenda-time">12:30–2:00 PM</div><div class="agenda-desc"><div class="title"><a href="https://www.amanosf.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Lunch — a Mano</a> 🍝</div><div class="sub"><a href="https://maps.google.com/?q=450+Hayes+St+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">450 Hayes St, San Francisco</a> · (415) 506-7401</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">Afternoon</div><div class="agenda-desc"><div class="title">Field Service + Data Cloud Technical Sessions</div><div class="sub">Deep-dive sessions on architecture and roadmap — directly relevant to Final Mile.</div></div><span class="badge badge-blue">High Value</span></div>
+        <div class="agenda-row"><div class="agenda-time">2:30–2:55 PM</div><div class="agenda-desc"><div class="title">Field Service SIC — Suite O78</div><div class="sub">Mandar, Eric, Sam, Chuck, Sean, Jason with Salesforce Field Service leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">3:00–3:55 PM</div><div class="agenda-desc"><div class="title">GEA Analytics SIC — Suite O47</div><div class="sub">Mandar, Jason, Sam, Chuck with Salesforce Analytics product leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+      </div>
+      <div class="agenda-day" style="box-shadow:none;margin-bottom:0;border-top:1px solid #EEF1F5;">
+        <div class="agenda-day-header">Wednesday, September 16</div>
+        <div class="agenda-row"><div class="agenda-time">8:00–10:00 AM</div><div class="agenda-desc"><div class="title">Slack Innovation Summit Breakfast ⚡</div><div class="sub">The St. Regis · Vitrine Room · 40 CxO/Senior Execs from Slack Top Accounts. Slack product vision as the Multiplayer Work OS — keynote insights, leadership perspectives, platform roadmap feedback. Hosts: Rob Seaman, Jaime DeLanghe, Revathi Venkatraman, Amy Bauer, Adam Samet, Zach Ciliotta-Young.</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">Morning</div><div class="agenda-desc"><div class="title">Manufacturing + Consumer Goods Keynote</div><div class="sub">GEA peer stories. Strong context for field service positioning in your industry.</div></div><span class="badge badge-orange">High Priority</span></div>
+        <div class="agenda-row"><div class="agenda-time">4:00–4:55 PM</div><div class="agenda-desc"><div class="title">B2B &amp; B2C Commerce SIC — Suite O87</div><div class="sub">Mandar, Eric, Chuck, Sean, Sam, Jason with Salesforce Commerce leadership.</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">6:00–8:00 PM</div><div class="agenda-desc"><div class="title"><a href="https://www.amber-india.com" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Dinner — Amber India</a> 🍛</div><div class="sub"><a href="https://maps.google.com/?q=25+Yerba+Buena+Lane+San+Francisco" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">25 Yerba Buena Lane, San Francisco</a> · (415) 777-0500</div></div><span class="badge badge-green">Confirmed</span></div>
+        <div class="agenda-row"><div class="agenda-time">6:00–9:30 PM</div><div class="agenda-desc"><div class="title">Dreamfest VIP Concert 🎶</div><div class="sub">Oracle Park · Doors 6:00 PM · Featuring Usher + Gwen Stefani · Benefits UCSF Benioff Children's Hospitals.</div></div><span class="badge badge-gray">Social</span></div>
+      </div>
+      <div class="agenda-day" style="box-shadow:none;border-top:1px solid #EEF1F5;border-radius:0 0 10px 10px;">
+        <div class="agenda-day-header" style="border-radius:0;">Thursday, September 17 — Departs Early</div>
+        <div class="agenda-row"><div class="agenda-time">~7:00 AM</div><div class="agenda-desc"><div class="title">Departs San Francisco</div><div class="sub">Consolidate key meetings on Sept 15–16.</div></div><span class="badge badge-gray">Travel</span></div>
+      </div>
+    </div>
+
+  </div><!-- /sam section -->
+
+<input type="file" id="notes-file-input" accept=".json" style="display:none" onchange="importNotes(event)">
+</main>
+
+<script>
+  /* ──── tab navigation ──── */
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const tabs = document.querySelectorAll('.nav-tab');
+    const map = { attendees: 0, speaking: 1, sics: 2, keynotes: 3, 'partner-events': 4, 'know-before': 5, 'full-team': 6, mandar: 7, jason: 8, sam: 9 };
+    if (map[id] !== undefined) tabs[map[id]].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ──── internal notes toggle ──── */
+  function toggleInternal(id) {
+    const panel = document.getElementById(id);
+    const toggle = document.getElementById(id + '-toggle');
+    if (panel.style.display === 'none') {
+      panel.style.display = 'block';
+      if (toggle) toggle.textContent = '▲ Hide';
+    } else {
+      panel.style.display = 'none';
+      if (toggle) toggle.textContent = '▼ Show';
+    }
+  }
+
+  /* ──── status picker system ──── */
+  const STATUS_STORE = 'gea-df-statuses';
+  const STATUS_CLASSES = { 'Action Required': 'sp-red', 'In Progress': 'sp-amber', 'To Do': 'sp-amber', 'Pending': 'sp-blue', 'Done': 'sp-green', 'N/A': 'sp-gray' };
+  const STATUS_OPTS = Object.keys(STATUS_CLASSES);
+
+  function getColorClass(val) {
+    return STATUS_CLASSES[val] || 'sp-gray';
+  }
+
+  function applyPickerColor(sel) {
+    Object.values(STATUS_CLASSES).forEach(c => sel.classList.remove(c));
+    sel.classList.add(getColorClass(sel.value));
+  }
+
+  function updateStatus(sel) {
+    applyPickerColor(sel);
+    const store = JSON.parse(localStorage.getItem(STATUS_STORE) || '{}');
+    store[sel.dataset.sid] = sel.value;
+    localStorage.setItem(STATUS_STORE, JSON.stringify(store));
+    updateProgress();
+  }
+
+  function loadStatuses() {
+    const store = JSON.parse(localStorage.getItem(STATUS_STORE) || '{}');
+    document.querySelectorAll('.status-picker[data-sid]').forEach(sel => {
+      const saved = store[sel.dataset.sid];
+      if (saved) {
+        sel.value = saved;
+      } else if (sel.dataset.default) {
+        sel.value = sel.dataset.default;
+      }
+      applyPickerColor(sel);
+    });
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const pickers = Array.from(document.querySelectorAll('.status-picker[data-sid]'));
+    if (!pickers.length) return;
+    const done = pickers.filter(s => s.value === 'Done' || s.value === 'N/A').length;
+    const pct = Math.round((done / pickers.length) * 100);
+    const pill = document.getElementById('progress-pill');
+    const bar  = document.getElementById('progress-bar');
+    if (pill) pill.textContent = pct + '% complete';
+    if (bar)  bar.style.width = pct + '%';
+  }
+
+  function resetStatuses() {
+    if (!confirm('Reset all status pickers to their defaults?')) return;
+    localStorage.removeItem(STATUS_STORE);
+    document.querySelectorAll('.status-picker[data-sid]').forEach(sel => {
+      sel.value = sel.querySelector('option').value;
+      applyPickerColor(sel);
+    });
+    updateProgress();
+  }
+
+  /* ──── checklist cycle ──── */
+  const CYCLE = ['check-tbd', 'check-done', 'check-no'];
+  const CYCLE_ICONS = { 'check-tbd': '○', 'check-done': '✓', 'check-no': '✗' };
+  const CHECKLIST_STORE = 'gea-df-checklist';
+
+  function cycleCheck(li) {
+    const cur = CYCLE.find(c => li.classList.contains(c)) || 'check-tbd';
+    const next = CYCLE[(CYCLE.indexOf(cur) + 1) % CYCLE.length];
+    CYCLE.forEach(c => li.classList.remove(c));
+    li.classList.add(next);
+    const icon = li.querySelector('.check-icon');
+    if (icon) icon.textContent = CYCLE_ICONS[next];
+    saveCycles();
+  }
+
+  function saveCycles() {
+    const state = {};
+    document.querySelectorAll('.checklist li[data-cid]').forEach(li => {
+      const cur = CYCLE.find(c => li.classList.contains(c)) || 'check-tbd';
+      state[li.dataset.cid] = cur;
+    });
+    localStorage.setItem(CHECKLIST_STORE, JSON.stringify(state));
+  }
+
+  function loadCycles() {
+    const state = JSON.parse(localStorage.getItem(CHECKLIST_STORE) || '{}');
+    document.querySelectorAll('.checklist li').forEach((li, i) => {
+      if (!li.dataset.cid) li.dataset.cid = 'chk-' + i;
+      if (state[li.dataset.cid]) {
+        CYCLE.forEach(c => li.classList.remove(c));
+        li.classList.add(state[li.dataset.cid]);
+      }
+      const icon = li.querySelector('.check-icon');
+      const cur = CYCLE.find(c => li.classList.contains(c)) || 'check-tbd';
+      if (icon) icon.textContent = CYCLE_ICONS[cur];
+      li.addEventListener('click', () => cycleCheck(li));
+    });
+  }
+
+  /* ──── init ──── */
+
+  /* ──── meeting notes ──── */
+  const NOTES_STORE = 'gea-df-notes';
+
+  function getNotes() {
+    return JSON.parse(localStorage.getItem(NOTES_STORE) || '{}');
+  }
+
+  function toggleNote(btn) {
+    const ta = btn.nextElementSibling;
+    const open = ta.style.display === 'block';
+    ta.style.display = open ? 'none' : 'block';
+    btn.textContent = open ? '📝 Add note' : '▲ Hide note';
+    if (!open) ta.focus();
+  }
+
+  function saveNote(ta) {
+    const notes = getNotes();
+    const person = ta.dataset.person;
+    const q = ta.dataset.q;
+    if (!notes[person]) notes[person] = {};
+    notes[person][q] = ta.value;
+    localStorage.setItem(NOTES_STORE, JSON.stringify(notes));
+  }
+
+  function loadNotes() {
+    const notes = getNotes();
+    document.querySelectorAll('.note-area[data-person]').forEach(ta => {
+      const val = (notes[ta.dataset.person] || {})[ta.dataset.q] || '';
+      if (val) {
+        ta.value = val;
+        ta.style.display = 'block';
+        const toggle = ta.previousElementSibling;
+        if (toggle?.classList.contains('note-toggle')) toggle.textContent = '▲ Hide note';
+      }
+    });
+  }
+
+  function exportAll() {
+    const payload = {
+      version: 1,
+      exported: new Date().toISOString(),
+      statuses:  JSON.parse(localStorage.getItem(STATUS_STORE)    || '{}'),
+      checklist: JSON.parse(localStorage.getItem(CHECKLIST_STORE) || '{}'),
+      notes:     JSON.parse(localStorage.getItem(NOTES_STORE)     || '{}'),
+    };
+    const json = JSON.stringify(payload, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    const date = new Date().toISOString().slice(0, 10);
+    a.href     = url;
+    a.download = 'gea-df-backup-' + date + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importAll(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const d = JSON.parse(e.target.result);
+        if (!confirm('Import this backup? Your current statuses, notes, checklist state, and question edits will be replaced.')) return;
+        if (d.statuses)  localStorage.setItem(STATUS_STORE,    JSON.stringify(d.statuses));
+        if (d.checklist) localStorage.setItem(CHECKLIST_STORE, JSON.stringify(d.checklist));
+        if (d.notes)     localStorage.setItem(NOTES_STORE,     JSON.stringify(d.notes));
+        // Re-render everything
+        loadStatuses();
+        loadCycles();
+        loadNotes();
+        alert('Backup restored successfully.');
+      } catch(err) {
+        alert('Could not read file — make sure it is a valid GEA DF backup.');
+      }
+      event.target.value = '';
+    };
+    reader.readAsText(file);
+  }
+
+  function exportNotes() { exportAll(); }
+  function importNotes(event) { importAll(event); }
+
+  document.addEventListener('input', e => {
+    if (e.target.classList.contains('note-area')) saveNote(e.target);
+  });
+
+  /* ──── init ──── */
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadStatuses();
+    loadNotes();
+    loadCycles();
+  });
+</script>
+
+</body>
+</html>
